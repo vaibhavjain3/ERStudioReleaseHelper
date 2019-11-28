@@ -4,10 +4,7 @@
 package main.java.com.erstudio;
 
 import main.java.com.erstudio.tsversionchange.ChangeTSVersionNumber;
-
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 /**
  * @author vaibhav.jain
