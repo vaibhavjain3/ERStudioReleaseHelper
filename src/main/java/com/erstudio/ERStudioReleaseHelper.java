@@ -5,6 +5,10 @@ package main.java.com.erstudio;
 
 import main.java.com.erstudio.tsversionchange.ChangeTSVersionNumber;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
 /**
  * @author vaibhav.jain
  *
@@ -19,7 +23,18 @@ public class ERStudioReleaseHelper {
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        ChangeTSVersionNumber changeTSVersionNumber = new ChangeTSVersionNumber("D://ERStudioReleaseHelper", "18.0", "18.1", "2567yug", 1);
+        ERStudioReleaseHelper erStudioReleaseHelper = new ERStudioReleaseHelper();
+        erStudioReleaseHelper.readExcel();
     }
 
+    // function to be triggered from UI button
+    public void readExcel() {
+        // set filepath of excel file
+        ChangeTSVersionNumber changeTSVersionNumber = new ChangeTSVersionNumber("C:\\Idera\\ERStudio\\ERStudioReleaseHelper\\ERStudio.xlsx", "18.0", "18.1", "2567yug", 1);
+        try {
+            changeTSVersionNumber.readExcel();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

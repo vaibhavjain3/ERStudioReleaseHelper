@@ -1,12 +1,28 @@
 package main.java.com.erstudio.tsversionchange;
 
-public class ChangeTSVersionNumber {
-    /*
-    Author: Shrey Pasari
-    Description: This entity will fetch the inputs provided by user and will process accordingly to update the version
-    */
+import java.io.IOException;
 
-    public ChangeTSVersionNumber(String folderPath, String oldVersion, String newVersion, String GUID, int upgradeType){
-       
+/**
+ * @author shrey.pasari
+ * @description This entity will fetch the inputs provided by user and will process accordingly to update the version
+ */
+public class ChangeTSVersionNumber {
+    String filePath;
+    String oldVersion;
+    String newVersion;
+    String GUID;
+    int upgradeType;
+
+    public ChangeTSVersionNumber(String filePath, String oldVersion, String newVersion, String GUID, int upgradeType) {
+        this.filePath = filePath;
+        this.oldVersion = oldVersion;
+        this.newVersion = newVersion;
+        this.GUID = GUID;
+        this.upgradeType = upgradeType;
+    }
+
+    public void readExcel() throws IOException {
+        ReadExcel readExcel = new ReadExcel();
+        readExcel.readExcel(this.filePath);
     }
 }
