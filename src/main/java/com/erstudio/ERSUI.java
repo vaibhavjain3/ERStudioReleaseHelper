@@ -1,5 +1,12 @@
 package main.java.com.erstudio;
 
+
+/**
+ * @author akshit.arora
+ * for the UI Skeleton
+ *
+ */
+
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
