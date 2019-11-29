@@ -4,7 +4,7 @@ package main.java.com.erstudio;
  * @author akshit.arora
  * for the UI Skeleton
  */
-import main.java.com.erstudio.constants.Constants;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
@@ -13,15 +13,27 @@ import java.awt.event.ActionListener;
 
 public class ERSStudioReleaseHelperUI {
 
-    JLabel labelTSString, labelVersionString, labelNewVersionString, labelGUID;
-    JTextField textFieldTs, textVersionString, textNewVersionString, textGUID;
-    JButton buttonBrowse, buttonGenerate, buttonChangeVersion, buttonReset;
-    ButtonGroup buttonGroupUpgradeType;
-    JRadioButton radioButtonFullUpgrade, radioButtonPatchUpgrade;
-    JTextArea textAreaStatus;
-    JFrame mainFrame;
-    JTabbedPane tabbedPaneUI;
-    JPanel panelTeamServer, panelDataArchitect, panelHelp;
+    private JLabel labelTSString;
+    private JLabel labelVersionString;
+    private JLabel labelNewVersionString;
+    private JLabel labelGUID;
+    private JTextField textFieldTs;
+    private JTextField textVersionString;
+    private JTextField textNewVersionString;
+    private JTextField textGUID;
+    private JButton buttonBrowse;
+    private JButton buttonGenerate;
+    private JButton buttonChangeVersion;
+    private JButton buttonReset;
+    private ButtonGroup buttonGroupUpgradeType;
+    private JRadioButton radioButtonFullUpgrade;
+    private JRadioButton radioButtonPatchUpgrade;
+    private JTextArea textAreaStatus;
+    private JFrame mainFrame;
+    private JTabbedPane tabbedPaneUI;
+    private JPanel panelTeamServer;
+    private JPanel panelDataArchitect;
+    private JPanel panelHelp;
 
     public JPanel initTeamServerUI() {
         panelTeamServer = new JPanel();
