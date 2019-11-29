@@ -15,11 +15,13 @@ import java.util.List;
  */
 public class ReadExcel {
 
-    public List<ExcelModel> readExcel(String SAMPLE_XLSX_FILE_PATH) throws IOException, InvalidPropertiesFormatException {
+    public List<ExcelModel> readExcel(String SAMPLE_XLSX_FILE_PATH) {
 
         List<ExcelModel> fileList = new ArrayList<>();
         // Creating a Workbook from an Excel file (.xls or .xlsx)
-        Workbook workbook = WorkbookFactory.create(new File(SAMPLE_XLSX_FILE_PATH));
+        Workbook workbook = null;
+        try {
+            workbook = WorkbookFactory.create(new File(SAMPLE_XLSX_FILE_PATH));
 
         // Retrieving the number of sheets in the Workbook
         Sheet sheet = workbook.getSheetAt(0);
@@ -35,21 +37,34 @@ public class ReadExcel {
                 ExcelModel excelModel = new ExcelModel();
                 while (cellIterator.hasNext()) {
                     Cell cell1 = cellIterator.next();
-                    //serial number
+                    // serial number
                     dataFormatter.formatCellValue(cell1);
+                    // file path
                     Cell cell2 = cellIterator.next();
                     excelModel.setFilepath(dataFormatter.formatCellValue(cell2));
+                    // full version : true/false
                     Cell cell3 = cellIterator.next();
                     excelModel.setFullVersion(dataFormatter.formatCellValue(cell3));
+                    // patch version : true/false
                     Cell cell4 = cellIterator.next();
                     excelModel.setPatchVersion(dataFormatter.formatCellValue(cell4));
+                    // string to replace format
                     Cell cell5 = cellIterator.next();
                     excelModel.setStringToReplaceFormat(dataFormatter.formatCellValue(cell5));
                     fileList.add(excelModel);
                 }
             }
         });
-        workbook.close();
+       // workbook.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                workbook.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return fileList;
     }
 }
