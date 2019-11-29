@@ -1,13 +1,10 @@
 package main.java.com.erstudio;
 
-
 /**
  * @author akshit.arora
  * for the UI Skeleton
  */
-
 import main.java.com.erstudio.constants.Constants;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
@@ -24,7 +21,7 @@ public class ERSStudioReleaseHelperUI {
     JTextArea textAreaStatus;
     JFrame mainFrame;
     JTabbedPane tabbedPaneUI;
-    JPanel panelTeamServer, panelDataHelper, panelHelp;
+    JPanel panelTeamServer, panelDataArchitect, panelHelp;
 
     public JPanel initTeamServerUI() {
         panelTeamServer = new JPanel();
@@ -191,9 +188,9 @@ public class ERSStudioReleaseHelperUI {
         return panelTeamServer;
     }
 
-    public JPanel initDataHelperUI() {
-        panelDataHelper = new JPanel();
-        return panelDataHelper;
+    public JPanel initDataArchitectUI() {
+        panelDataArchitect = new JPanel();
+        return panelDataArchitect;
     }
 
     public JPanel initHelpUI() {
@@ -217,7 +214,6 @@ public class ERSStudioReleaseHelperUI {
         }
     }
 
-
     public ERSStudioReleaseHelperUI() {
         mainFrame = new JFrame(Constants.ERS_STUDIO_RELEASE_HELPER);
 
@@ -225,11 +221,11 @@ public class ERSStudioReleaseHelperUI {
         tabbedPaneUI.setBounds(50, 50, 600, 570);
 
         JPanel panelTeamServerUI = initTeamServerUI();
-        JPanel panelDataHelperUI = initDataHelperUI();
+        JPanel panelDataArchitectUI = initDataArchitectUI();
         JPanel panelHelpUI = initHelpUI();
 
         tabbedPaneUI.add(Constants.TEAM_SERVER, panelTeamServerUI);
-        tabbedPaneUI.add(Constants.DATA_HELPER, panelDataHelperUI);
+        tabbedPaneUI.add(Constants.DATA_HELPER, panelDataArchitectUI);
         tabbedPaneUI.add(Constants.HELP, panelHelpUI);
 
         mainFrame.add(tabbedPaneUI);
