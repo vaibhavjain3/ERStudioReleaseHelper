@@ -21,4 +21,5 @@ public class Constants {
     public static final String DATA_ARCHITECT = "Data Architect";
     public static final String HELP = "Help";
     public static final String ERS_STUDIO_RELEASE_HELPER = "ERS Studio Release Helper";
+    public static final String VERSION_HELPER_SHEET = "D:\\ERStudioReleaseHelper\\ERStudio.xlsx";
 }

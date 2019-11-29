@@ -4,7 +4,11 @@ package main.java.com.erstudio;
  * @author akshit.arora
  * for the UI Skeleton
  */
+
 import main.java.com.erstudio.constants.Constants;
+import main.java.com.erstudio.tsversionchange.ChangeTSVersionNumber;
+import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
@@ -157,6 +161,13 @@ public class ERSStudioReleaseHelperUI {
         panelTeamServer.add(radioButtonPatchUpgrade, gridBagConstraints);
 
         buttonChangeVersion = new JButton(Constants.CHANGE_VERSION_NUMBER);
+        buttonChangeVersion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onPressedChangeVersion();
+            }
+        });
+
         buttonReset = new JButton(Constants.RESET);
 
         gridBagConstraints.gridwidth = 1;
@@ -196,6 +207,12 @@ public class ERSStudioReleaseHelperUI {
     public JPanel initHelpUI() {
         panelHelp = new JPanel();
         return panelHelp;
+    }
+
+    public void onPressedChangeVersion() {
+        // need to be set from text fields by darpan
+        VersionInputModel versionInputModel = new VersionInputModel("D:/ERSStudioHelper", "18.0", "18.1", "1234", 1);
+        new ChangeTSVersionNumber(versionInputModel);
     }
 
     public void onPressedBrowse() {

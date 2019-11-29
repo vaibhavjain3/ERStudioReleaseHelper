@@ -1,8 +1,7 @@
 package main.java.com.erstudio.tsversionchange;
 
+import main.java.com.erstudio.constants.Constants;
 import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
-
-import java.io.IOException;
 
 /**
  * @author shrey.pasari
@@ -10,14 +9,8 @@ import java.io.IOException;
  */
 public class ChangeTSVersionNumber {
 
-    public static final String VERSION_HELPER_SHEET = "D:\\ERStudioReleaseHelper\\ERStudio.xlsx";
-
-
     public ChangeTSVersionNumber(VersionInputModel versionInputModel) {
-
         // processing excel file
-        ProcessExcel processExcel = new ProcessExcel(VERSION_HELPER_SHEET);
-
+        ProcessExcel processExcel = new ProcessExcel(Constants.VERSION_HELPER_SHEET);
     }
-
 }
