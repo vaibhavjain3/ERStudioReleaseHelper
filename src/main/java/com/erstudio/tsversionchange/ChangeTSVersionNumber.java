@@ -1,5 +1,7 @@
 package main.java.com.erstudio.tsversionchange;
 
+import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
+
 import java.io.IOException;
 
 /**
@@ -7,22 +9,15 @@ import java.io.IOException;
  * @description This entity will fetch the inputs provided by user and will process accordingly to update the version
  */
 public class ChangeTSVersionNumber {
-    String filePath;
-    String oldVersion;
-    String newVersion;
-    String GUID;
-    int upgradeType;
 
-    public ChangeTSVersionNumber(String filePath, String oldVersion, String newVersion, String GUID, int upgradeType) {
-        this.filePath = filePath;
-        this.oldVersion = oldVersion;
-        this.newVersion = newVersion;
-        this.GUID = GUID;
-        this.upgradeType = upgradeType;
+    public static final String VERSION_HELPER_SHEET = "D:\\ERStudioReleaseHelper\\ERStudio.xlsx";
+
+
+    public ChangeTSVersionNumber(VersionInputModel versionInputModel) {
+
+        // processing excel file
+        ProcessExcel processExcel = new ProcessExcel(VERSION_HELPER_SHEET);
+
     }
 
-    public void readExcel() throws IOException {
-        ReadExcel readExcel = new ReadExcel();
-        readExcel.readExcel(this.filePath);
-    }
 }

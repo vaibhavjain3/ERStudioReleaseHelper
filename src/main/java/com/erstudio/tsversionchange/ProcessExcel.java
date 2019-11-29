@@ -11,11 +11,24 @@ import java.util.List;
 
 /**
  * @author rajat.batra
- * @description reads excel file
+ * @description reads excel file and returns list of files to be updated
  */
-public class ReadExcel {
+public class ProcessExcel {
+    List<ExcelModel> processedExcelList;
 
-    public List<ExcelModel> readExcel(String SAMPLE_XLSX_FILE_PATH) {
+    public ProcessExcel(String excelFilePath){
+        this.processedExcelList = processExcelFile(excelFilePath);
+    }
+
+    public List<ExcelModel> getProcessedExcelList() {
+        return processedExcelList;
+    }
+
+    public void setProcessedExcelList(List<ExcelModel> processedExcelList) {
+        this.processedExcelList = processedExcelList;
+    }
+
+    public List<ExcelModel> processExcelFile(String SAMPLE_XLSX_FILE_PATH) {
 
         List<ExcelModel> fileList = new ArrayList<>();
         // Creating a Workbook from an Excel file (.xls or .xlsx)
