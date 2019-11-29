@@ -1,0 +1,61 @@
+package main.java.com.erstudio.tsversionchange.model;
+
+/**
+ * @author shrey.pasari
+ * @description User Input Model
+ */
+public class VersionInputModel {
+    String filePath;
+    String oldVersion;
+    String newVersion;
+    String GUID;
+    int upgradeType;
+
+    public VersionInputModel(String filePath, String oldVersion, String newVersion, String GUID, int upgradeType) {
+        this.filePath = filePath;
+        this.oldVersion = oldVersion;
+        this.newVersion = newVersion;
+        this.GUID = GUID;
+        this.upgradeType = upgradeType;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getOldVersion() {
+        return oldVersion;
+    }
+
+    public void setOldVersion(String oldVersion) {
+        this.oldVersion = oldVersion;
+    }
+
+    public String getNewVersion() {
+        return newVersion;
+    }
+
+    public void setNewVersion(String newVersion) {
+        this.newVersion = newVersion;
+    }
+
+    public String getGUID() {
+        return GUID;
+    }
+
+    public void setGUID(String GUID) {
+        this.GUID = GUID;
+    }
+
+    public int getUpgradeType() {
+        return upgradeType;
+    }
+
+    public void setUpgradeType(int upgradeType) {
+        this.upgradeType = upgradeType;
+    }
+}
