@@ -9,15 +9,14 @@ package main.java.com.erstudio;
  */
 public class ERStudioReleaseHelper {
 
-	/**
-	 * Launches ERStudio Helper Application
-	 * @param args
-	 */
+    /**
+     * Launches ERStudio Helper Application
+     * @param args
+     */
 
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ERSUI ersUI = new ERSUI();
-	}
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        ERSStudioReleaseHelperUI ERStudioReleaseHelperUI = new ERSStudioReleaseHelperUI();
+    }
 
 }
