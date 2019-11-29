@@ -18,7 +18,7 @@ public class Constants {
     public static final String CHANGE_VERSION_NUMBER = "Change Version Number";
     public static final String RESET = "Reset";
     public static final String TEAM_SERVER = "TeamServer";
-    public static final String DATA_HELPER = "Data Helper";
+    public static final String DATA_ARCHITECT = "Data Architect";
     public static final String HELP = "Help";
     public static final String ERS_STUDIO_RELEASE_HELPER = "ERS Studio Release Helper";
 }

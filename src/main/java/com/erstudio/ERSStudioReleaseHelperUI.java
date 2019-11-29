@@ -17,7 +17,7 @@ public class ERSStudioReleaseHelperUI {
     JTextField textFieldTs, textVersionString, textNewVersionString, textGUID;
     JButton buttonBrowse, buttonGenerate, buttonChangeVersion, buttonReset;
     ButtonGroup buttonGroupUpgradeType;
-    JRadioButton jRadioButtonFullUpgrade, jRadioButtonPatchUpgrade;
+    JRadioButton radioButtonFullUpgrade, radioButtonPatchUpgrade;
     JTextArea textAreaStatus;
     JFrame mainFrame;
     JTabbedPane tabbedPaneUI;
@@ -136,10 +136,10 @@ public class ERSStudioReleaseHelperUI {
         panelTeamServer.add(buttonGenerate, gridBagConstraints);
 
         buttonGroupUpgradeType = new ButtonGroup();
-        jRadioButtonFullUpgrade = new JRadioButton(Constants.FULL_UPGRADE);
-        jRadioButtonPatchUpgrade = new JRadioButton(Constants.PATCH_UPGRADE);
-        buttonGroupUpgradeType.add(jRadioButtonFullUpgrade);
-        buttonGroupUpgradeType.add(jRadioButtonPatchUpgrade);
+        radioButtonFullUpgrade = new JRadioButton(Constants.FULL_UPGRADE);
+        radioButtonPatchUpgrade = new JRadioButton(Constants.PATCH_UPGRADE);
+        buttonGroupUpgradeType.add(radioButtonFullUpgrade);
+        buttonGroupUpgradeType.add(radioButtonPatchUpgrade);
 
         gridBagConstraints.gridwidth = 1;
         gridBagConstraints.weightx = .5;
@@ -147,14 +147,14 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.ipadx = 0;
         gridBagConstraints.gridy = 5;
-        panelTeamServer.add(jRadioButtonFullUpgrade, gridBagConstraints);
+        panelTeamServer.add(radioButtonFullUpgrade, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
         gridBagConstraints.weightx = .5;
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
-        panelTeamServer.add(jRadioButtonPatchUpgrade, gridBagConstraints);
+        panelTeamServer.add(radioButtonPatchUpgrade, gridBagConstraints);
 
         buttonChangeVersion = new JButton(Constants.CHANGE_VERSION_NUMBER);
         buttonReset = new JButton(Constants.RESET);
@@ -198,19 +198,18 @@ public class ERSStudioReleaseHelperUI {
         return panelHelp;
     }
 
-    //on click the of browse button
     public void onPressedBrowse() {
-        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
         // set the selection mode to directories only
-        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         // invoke the showsOpenDialog function to show the save dialog
-        int r = j.showOpenDialog(null);
+        int stateFileChooser = fileChooser.showOpenDialog(null);
 
-        if (r == JFileChooser.APPROVE_OPTION) {
+        if (stateFileChooser == JFileChooser.APPROVE_OPTION) {
             // set the label to the path of the selected directory
-            textFieldTs.setText(j.getSelectedFile().getAbsolutePath());
+            textFieldTs.setText(fileChooser.getSelectedFile().getAbsolutePath());
         }
     }
 
@@ -225,7 +224,7 @@ public class ERSStudioReleaseHelperUI {
         JPanel panelHelpUI = initHelpUI();
 
         tabbedPaneUI.add(Constants.TEAM_SERVER, panelTeamServerUI);
-        tabbedPaneUI.add(Constants.DATA_HELPER, panelDataArchitectUI);
+        tabbedPaneUI.add(Constants.DATA_ARCHITECT, panelDataArchitectUI);
         tabbedPaneUI.add(Constants.HELP, panelHelpUI);
 
         mainFrame.add(tabbedPaneUI);
