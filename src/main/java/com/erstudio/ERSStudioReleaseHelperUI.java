@@ -10,6 +10,14 @@ import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.Set;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.regex.Pattern;
 
 public class ERSStudioReleaseHelperUI {
 
@@ -32,12 +40,6 @@ public class ERSStudioReleaseHelperUI {
         textFieldTs.setEditable(false);
         buttonBrowse = new JButton(Constants.BROWSE);
 
-        buttonBrowse.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onPressedBrowse();
-            }
-        });
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
         gridBagConstraints.gridwidth = 1;
@@ -52,8 +54,7 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 200;
-        gridBagConstraints.ipady = 10;
+        textFieldTs.setPreferredSize(new Dimension(200, 30));
         panelTeamServer.add(textFieldTs, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -81,8 +82,7 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = 0;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 200;
-        gridBagConstraints.ipady = 10;
+        textVersionString.setPreferredSize(new Dimension(200, 30));
         panelTeamServer.add(textVersionString, gridBagConstraints);
 
         labelNewVersionString = new JLabel(Constants.NEW_VERSION_STRING);
@@ -101,8 +101,7 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 200;
-        gridBagConstraints.ipady = 10;
+        textNewVersionString.setPreferredSize(new Dimension(200, 30));
         panelTeamServer.add(textNewVersionString, gridBagConstraints);
 
         labelGUID = new JLabel(Constants.GUID);
@@ -122,8 +121,7 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 200;
-        gridBagConstraints.ipady = 10;
+        textGUID.setPreferredSize(new Dimension(200, 30));
         panelTeamServer.add(textGUID, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -185,6 +183,9 @@ public class ERSStudioReleaseHelperUI {
         panelTeamServer.add(textAreaStatus, gridBagConstraints);
         textAreaStatus.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+        // adding listeners to the components
+        addListeners();
+
         return panelTeamServer;
     }
 
@@ -210,7 +211,105 @@ public class ERSStudioReleaseHelperUI {
         if (stateFileChooser == JFileChooser.APPROVE_OPTION) {
             // set the label to the path of the selected directory
             textFieldTs.setText(fileChooser.getSelectedFile().getAbsolutePath());
+            // invoke method to validate selected directory path
+            validateSelectedDirectory();
         }
+    }
+
+    // method to match version with the regex
+    public boolean isValidVersionNumber(String tabTitle, String version) {
+        if (tabTitle.equals(Constants.TEAM_SERVER)) {
+            return Pattern.matches(Constants.ERS_STUDIO_RELEASE_VERSION_PATTERN, version);
+        }
+
+        if (tabTitle.equals(Constants.DATA_ARCHITECT)) {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    // method to check if the directory is valid or not
+    public boolean isValidDirectory(String tabTitle, String path) {
+        File directory = new File(path);
+
+        if (!directory.isDirectory()) {
+            return false;
+        }
+
+        if (tabTitle.equals(Constants.TEAM_SERVER)) {
+            FilenameFilter ersFileFilter = new FilenameFilter() {
+                public boolean accept(File file, String fileName) {
+                    if (!file.isDirectory()) {
+                        return false;
+                    }
+                    if (fileName.equals(Constants.ERS_STUDIO_DIRECTORY_CONFIGURATOR)
+                            || fileName.equals(Constants.ERS_STUDIO_DIRECTORY_ERSPORTAL)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            };
+            Set<String> validDirectoriesList = new HashSet<>(Arrays.asList(directory.list(ersFileFilter)));
+            if (validDirectoriesList.size() == 2) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        if (tabTitle.equals(Constants.DATA_ARCHITECT)) {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    // method to validate directory path
+    public void validateSelectedDirectory() {
+        if (!isValidDirectory(tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex()), textFieldTs.getText())) {
+            textFieldTs.setBackground(new Color(255, 153, 153));
+        } else {
+            textFieldTs.setBackground(tabbedPaneUI.getSelectedComponent().getBackground());
+        }
+    }
+
+    // method to add all the required listeners
+    public void addListeners() {
+        // add action listener to browse button
+        buttonBrowse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onPressedBrowse();
+            }
+        });
+
+        // add key listener to old version text field
+        textVersionString.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent EVT) {
+                String versionValue = textVersionString.getText();
+                if (!isValidVersionNumber(tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex()), versionValue)) {
+                    textVersionString.setBackground(new Color(255, 153, 153));
+                } else {
+                    textVersionString.setBackground(Color.WHITE);
+                }
+            }
+        });
+
+        // add key listener to new version text field
+        textNewVersionString.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent EVT) {
+                String versionValue = textNewVersionString.getText();
+                if (!isValidVersionNumber(tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex()), versionValue)) {
+                    textNewVersionString.setBackground(new Color(255, 153, 153));
+                } else {
+                    textNewVersionString.setBackground(Color.WHITE);
+                }
+            }
+        });
     }
 
     public ERSStudioReleaseHelperUI() {
