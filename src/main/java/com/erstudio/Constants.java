@@ -1,4 +1,4 @@
-package main.java.com.erstudio.constants;
+package main.java.com.erstudio;
 
 /**
  * @author akshit.arora

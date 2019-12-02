@@ -2,7 +2,8 @@ Code Check-in Process
 1. Fork Main Repository in local User
 2. Create branch if required
 3. Complete code changes and dev test
-4. Commit-Push changes in git Repository and Raise a pull request against Main Repository.
+4. Commit-Push changes in git Repository and Raise a pull request against Main Repository. Notify reviewer to review the changes.
+5. If any review comments come, perform step 3-4 again and resolve conversation. Same pull request will pick the changes.
 
 Java
 1. Code should be formatted before check-in. No Extra lines in between class or at the end of file.
@@ -15,3 +16,4 @@ Java
    Variable: should not start with _ or $. 
    Constant variable: should be in all Capitalized letters with internal words separated by _.
    Packages: should be in all small letters.
+6. Add getters, setters, toString methods in Entity classes(wherever required)
