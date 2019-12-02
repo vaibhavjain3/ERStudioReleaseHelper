@@ -8,7 +8,7 @@ public class ExcelModel {
     String filepath;
     String fullVersion;
     String patchVersion;
-    String stringToReplaceFormat;
+    VersionFormat versionFormat;
 
     public String getFilepath() {
         return filepath;
@@ -34,11 +34,11 @@ public class ExcelModel {
         this.patchVersion = patchVersion;
     }
 
-    public String getStringToReplaceFormat() {
-        return stringToReplaceFormat;
+    public VersionFormat getVersionFormat() {
+        return versionFormat;
     }
 
-    public void setStringToReplaceFormat(String stringToReplaceFormat) {
-        this.stringToReplaceFormat = stringToReplaceFormat;
+    public void setVersionFormat(VersionFormat versionFormat) {
+        this.versionFormat = versionFormat;
     }
 }

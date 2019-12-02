@@ -1,8 +1,8 @@
 package main.java.com.erstudio.tsversionchange;
 
 import main.java.com.erstudio.tsversionchange.model.ExcelModel;
+import main.java.com.erstudio.tsversionchange.model.VersionFormat;
 import org.apache.poi.ss.usermodel.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,7 +63,8 @@ public class ProcessExcel {
                         excelModel.setPatchVersion(dataFormatter.formatCellValue(cell4));
                         // string to replace format
                         Cell cell5 = cellIterator.next();
-                        excelModel.setStringToReplaceFormat(dataFormatter.formatCellValue(cell5));
+                        VersionFormat versionFormat = new VersionFormat(dataFormatter.formatCellValue(cell5));
+                        excelModel.setVersionFormat(versionFormat);
                         fileList.add(excelModel);
                     }
                 }
