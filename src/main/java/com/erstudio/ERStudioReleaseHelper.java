@@ -18,5 +18,4 @@ public class ERStudioReleaseHelper {
         // TODO Auto-generated method stub
         ERSStudioReleaseHelperUI ERStudioReleaseHelperUI = new ERSStudioReleaseHelperUI();
     }
-
 }
