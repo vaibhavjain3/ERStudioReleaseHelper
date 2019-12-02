@@ -14,9 +14,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.Set;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.regex.Pattern;
 
 public class ERSStudioReleaseHelperUI {
@@ -250,21 +249,17 @@ public class ERSStudioReleaseHelperUI {
         }
 
         if (tabTitle.equals(Constants.TEAM_SERVER)) {
-            FilenameFilter ersFileFilter = new FilenameFilter() {
+            FilenameFilter directoryFilter = new FilenameFilter() {
                 public boolean accept(File file, String fileName) {
-                    if (!file.isDirectory()) {
-                        return false;
-                    }
-                    if (fileName.equals(Constants.ERS_STUDIO_DIRECTORY_CONFIGURATOR)
-                            || fileName.equals(Constants.ERS_STUDIO_DIRECTORY_ERSPORTAL)) {
+                    if (file.isDirectory()) {
                         return true;
                     } else {
                         return false;
                     }
                 }
             };
-            Set<String> validDirectoriesList = new HashSet<>(Arrays.asList(directory.list(ersFileFilter)));
-            if (validDirectoriesList.size() == 2) {
+            ArrayList<String> directoryList = new ArrayList<>(Arrays.asList(directory.list(directoryFilter)));
+            if (directoryList.contains(Constants.ERS_STUDIO_DIRECTORY_CONFIGURATOR) && directoryList.contains(Constants.ERS_STUDIO_DIRECTORY_ERSPORTAL)) {
                 return true;
             } else {
                 return false;
