@@ -6,6 +6,7 @@ package main.java.com.erstudio.constants;
  */
 
 public class Constants {
+
     public static final String TS_MAIN_FOLDER = "Please choose TS main folder";
     public static final String BROWSE = "Browse";
     public static final String STRING_TO_BE_REPLACED = "Version String to be Replaced";
