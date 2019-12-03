@@ -2,13 +2,13 @@ package main.java.com.erstudio.tsversionchange.model;
 
 public class VersionFormat {
 
-String format;
-int majorVersion;
-int minorVersion;
-int revisionNumber;
-int buildNumber;
+    String format;
+    String majorVersion;
+    String minorVersion;
+    String revisionNumber;
+    String buildNumber;
 
-    public VersionFormat(int majorVersion, int minorVersion, int revisionNumber, int buildNumber) {
+    public VersionFormat(String majorVersion, String minorVersion, String revisionNumber, String buildNumber) {
         this.majorVersion = majorVersion;
         this.minorVersion = minorVersion;
         this.revisionNumber = revisionNumber;
@@ -27,35 +27,35 @@ int buildNumber;
         this.format = format;
     }
 
-    public int getMajorVersion() {
+    public String getMajorVersion() {
         return majorVersion;
     }
 
-    public void setMajorVersion(int majorVersion) {
+    public void setMajorVersion(String majorVersion) {
         this.majorVersion = majorVersion;
     }
 
-    public int getMinorVersion() {
+    public String getMinorVersion() {
         return minorVersion;
     }
 
-    public void setMinorVersion(int minorVersion) {
+    public void setMinorVersion(String minorVersion) {
         this.minorVersion = minorVersion;
     }
 
-    public int getRevisionNumber() {
+    public String getRevisionNumber() {
         return revisionNumber;
     }
 
-    public void setRevisionNumber(int revisionNumber) {
+    public void setRevisionNumber(String revisionNumber) {
         this.revisionNumber = revisionNumber;
     }
 
-    public int getBuildNumber() {
+    public String getBuildNumber() {
         return buildNumber;
     }
 
-    public void setBuildNumber(int buildNumber) {
+    public void setBuildNumber(String buildNumber) {
         this.buildNumber = buildNumber;
     }
 }
