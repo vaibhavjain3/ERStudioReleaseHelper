@@ -6,6 +6,7 @@ package main.java.com.erstudio;
  */
 
 import main.java.com.erstudio.constants.Constants;
+import main.java.com.erstudio.model.UpgradeTypeEnum;
 import main.java.com.erstudio.tsversionchange.ChangeTSVersionNumber;
 import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
 import javax.swing.*;
@@ -222,7 +223,7 @@ public class ERSStudioReleaseHelperUI {
 
     public void onPressedChangeVersion() {
         // need to be set from text fields by darpan
-        VersionInputModel versionInputModel = new VersionInputModel("D:/ERSStudioHelper", "18.0", "18.1", "1234", 1);
+        VersionInputModel versionInputModel = new VersionInputModel("D:/ERSStudioHelper", "18.0", "18.1", "1234", UpgradeTypeEnum.FULL_UPGRADE);
         new ChangeTSVersionNumber(versionInputModel);
     }
 
