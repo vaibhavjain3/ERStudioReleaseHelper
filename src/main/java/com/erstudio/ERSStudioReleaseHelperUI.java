@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class ERSStudioReleaseHelperUI {
@@ -223,8 +224,9 @@ public class ERSStudioReleaseHelperUI {
 
     public void onPressedChangeVersion() {
         // need to be set from text fields by darpan
-        VersionInputModel versionInputModel = new VersionInputModel("D:/ERSStudioHelper", "18.0", "18.1", "1234", UpgradeTypeEnum.FULL_UPGRADE);
-        new ChangeTSVersionNumber(versionInputModel);
+        VersionInputModel versionInputModel = new VersionInputModel("C:\\Idera\\ERStudioFiles", "20.2.2.0", "20.2.3.0", "1234", UpgradeTypeEnum.FULL_UPGRADE);
+        ChangeTSVersionNumber changeTSVersionNumber = new ChangeTSVersionNumber(versionInputModel);
+        List<String> response = changeTSVersionNumber.changeVersion(versionInputModel);
     }
 
     public void onPressedBrowse() {
