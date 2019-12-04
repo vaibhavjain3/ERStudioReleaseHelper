@@ -4,7 +4,7 @@ import main.java.com.erstudio.constants.Constants;
 
 public enum UpgradeTypeEnum {
 
-    FULL_UPGRADE(Constants.MAJOR_OR_MINOR_UPGRADE),
+    MAJOR_OR_MINOR_UPGRADE(Constants.MAJOR_OR_MINOR_UPGRADE),
     PATCH_UPGRADE(Constants.PATCH_UPGRADE);
 
     // declaring private variable for getting values

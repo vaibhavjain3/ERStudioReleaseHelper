@@ -1,5 +1,7 @@
 package main.java.com.erstudio.tsversionchange.model;
 
+import main.java.com.erstudio.model.UpgradeTypeEnum;
+
 /**
  * @author shrey.pasari
  * @description User Input Model
@@ -9,9 +11,10 @@ public class VersionInputModel {
     String oldVersion;
     String newVersion;
     String GUID;
-    int upgradeType;
+    UpgradeTypeEnum upgradeType;
 
-    public VersionInputModel(String filePath, String oldVersion, String newVersion, String GUID, int upgradeType) {
+
+    public VersionInputModel(String filePath, String oldVersion, String newVersion, String GUID, UpgradeTypeEnum upgradeType) {
         this.filePath = filePath;
         this.oldVersion = oldVersion;
         this.newVersion = newVersion;
@@ -51,11 +54,11 @@ public class VersionInputModel {
         this.GUID = GUID;
     }
 
-    public int getUpgradeType() {
+    public UpgradeTypeEnum getUpgradeType() {
         return upgradeType;
     }
 
-    public void setUpgradeType(int upgradeType) {
+    public void setUpgradeType(UpgradeTypeEnum upgradeType) {
         this.upgradeType = upgradeType;
     }
 }

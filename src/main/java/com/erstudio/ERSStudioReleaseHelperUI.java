@@ -6,6 +6,7 @@ package main.java.com.erstudio;
  */
 
 import main.java.com.erstudio.constants.Constants;
+import main.java.com.erstudio.model.UpgradeTypeEnum;
 import main.java.com.erstudio.tsversionchange.ChangeTSVersionNumber;
 import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
 import main.java.com.erstudio.utility.InputUtils;
@@ -15,6 +16,7 @@ import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class ERSStudioReleaseHelperUI {
 
@@ -395,8 +397,9 @@ public class ERSStudioReleaseHelperUI {
     public void onPressedChangeVersion() {
         // need to be set from text fields by darpan
         if (validateInput(tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex()))) {
-            VersionInputModel versionInputModel = new VersionInputModel("D:/ERSStudioHelper", "18.0", "18.1", "1234", 1);
-            new ChangeTSVersionNumber(versionInputModel);
+            VersionInputModel versionInputModel = new VersionInputModel("C:\\Idera\\ERStudioFiles", "20.2.2.0", "20.2.3.0", "1234", UpgradeTypeEnum.MAJOR_OR_MINOR_UPGRADE);
+            ChangeTSVersionNumber changeTSVersionNumber = new ChangeTSVersionNumber(versionInputModel);
+            List<String> response = changeTSVersionNumber.changeVersion(versionInputModel);
         }
     }
 
