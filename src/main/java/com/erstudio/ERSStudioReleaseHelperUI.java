@@ -10,7 +10,6 @@ import main.java.com.erstudio.model.UpgradeTypeEnum;
 import main.java.com.erstudio.tsversionchange.ChangeTSVersionNumber;
 import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
 import main.java.com.erstudio.utility.InputUtils;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
