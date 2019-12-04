@@ -4,7 +4,7 @@ import main.java.com.erstudio.constants.Constants;
 
 /**
  * @author akshit.arora
- * for upgrade type panel
+ * for upgrade type Enum
  */
 public enum UpgradeTypeEnum {
 
