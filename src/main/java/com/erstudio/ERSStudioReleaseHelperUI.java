@@ -7,6 +7,7 @@ package main.java.com.erstudio;
 
 import main.java.com.erstudio.constants.Constants;
 import main.java.com.erstudio.model.UpgradeTypeEnum;
+import main.java.com.erstudio.model.GradientPanel;
 import main.java.com.erstudio.tsversionchange.ChangeTSVersionNumber;
 import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
 import main.java.com.erstudio.utility.InputUtils;
@@ -49,9 +50,10 @@ public class ERSStudioReleaseHelperUI {
     private JPanel panelTeamServer;
     private JPanel panelDataArchitect;
     private JPanel panelHelp;
+    private JScrollPane scrollPaneStatus;
 
     public JPanel initTeamServerUI() {
-        panelTeamServer = new JPanel();
+        panelTeamServer = new GradientPanel();
         panelTeamServer.setLayout(new GridBagLayout());
 
         labelTSString = new JLabel(Constants.TS_MAIN_FOLDER);
@@ -81,6 +83,7 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         textFieldTS.setPreferredSize(new Dimension(200, 30));
+        textFieldTS.setBackground(Color.WHITE);
         panelTeamServer.add(textFieldTS, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -88,8 +91,7 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 0;
+        buttonBrowse.setPreferredSize(new Dimension(100, 25));
         panelTeamServer.add(buttonBrowse, gridBagConstraints);
 
         labelVersionString = new JLabel(Constants.STRING_TO_BE_REPLACED);
@@ -155,8 +157,7 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 0;
+        buttonGenerate.setPreferredSize(new Dimension(100, 25));
         panelTeamServer.add(buttonGenerate, gridBagConstraints);
 
         buttonGroupUpgradeTypeTS = new ButtonGroup();
@@ -169,8 +170,9 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weightx = .5;
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.ipadx = 0;
         gridBagConstraints.gridy = 5;
+        radioButtonMajorMinorUpgradeTS.setPreferredSize(new Dimension(150, 25));
+        radioButtonMajorMinorUpgradeTS.setOpaque(false);
         panelTeamServer.add(radioButtonMajorMinorUpgradeTS, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -178,6 +180,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
+        radioButtonPatchUpgradeTS.setPreferredSize(new Dimension(120, 25));
+        radioButtonPatchUpgradeTS.setOpaque(false);
         panelTeamServer.add(radioButtonPatchUpgradeTS, gridBagConstraints);
 
         buttonChangeVersion = new JButton(Constants.CHANGE_VERSION_NUMBER);
@@ -187,8 +191,13 @@ public class ERSStudioReleaseHelperUI {
                 onPressedChangeVersion();
             }
         });
-
         buttonReset = new JButton(Constants.RESET);
+        buttonReset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onPressedReset();
+            }
+        });
 
         gridBagConstraints.gridwidth = 1;
         gridBagConstraints.weightx = .5;
@@ -208,19 +217,20 @@ public class ERSStudioReleaseHelperUI {
 
         textAreaStatusTS = new JTextArea();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 100;
-        gridBagConstraints.weightx = 0.0;
+        gridBagConstraints.weightx = 0.5;
         gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new Insets(0, 10, 0, 10);
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
-        panelTeamServer.add(textAreaStatusTS, gridBagConstraints);
-        textAreaStatusTS.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        textAreaStatusTS.setPreferredSize(new Dimension(0, 150));
+        scrollPaneStatus = new JScrollPane(textAreaStatusTS);
+        panelTeamServer.add(scrollPaneStatus, gridBagConstraints);
 
         return panelTeamServer;
     }
 
     public JPanel initDataArchitectUI() {
-        panelDataArchitect = new JPanel();
+        panelDataArchitect = new GradientPanel();
         panelDataArchitect.setLayout(new GridBagLayout());
 
         labelDAString = new JLabel(Constants.DA_MAIN_FOLDER);
@@ -249,6 +259,7 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        textFieldDA.setBackground(Color.WHITE);
         textFieldDA.setPreferredSize(new Dimension(200, 30));
         panelDataArchitect.add(textFieldDA, gridBagConstraints);
 
@@ -257,8 +268,7 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 0;
+        buttonBrowse.setPreferredSize(new Dimension(100, 25));
         panelDataArchitect.add(buttonBrowse, gridBagConstraints);
 
         labelVersionString = new JLabel(Constants.STRING_TO_BE_REPLACED);
@@ -324,8 +334,7 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 0;
+        buttonGenerate.setPreferredSize(new Dimension(100, 25));
         panelDataArchitect.add(buttonGenerate, gridBagConstraints);
 
         buttonGroupUpgradeTypeDA = new ButtonGroup();
@@ -338,8 +347,9 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weightx = .5;
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.ipadx = 0;
         gridBagConstraints.gridy = 5;
+        radioButtonMajorMinorDA.setPreferredSize(new Dimension(150, 30));
+        radioButtonMajorMinorDA.setOpaque(false);
         panelDataArchitect.add(radioButtonMajorMinorDA, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -347,6 +357,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
+        radioButtonPatchUpgradeDA.setPreferredSize(new Dimension(150, 30));
+        radioButtonPatchUpgradeDA.setOpaque(false);
         panelDataArchitect.add(radioButtonPatchUpgradeDA, gridBagConstraints);
 
         buttonChangeVersion = new JButton(Constants.CHANGE_VERSION_NUMBER);
@@ -358,6 +370,12 @@ public class ERSStudioReleaseHelperUI {
         });
 
         buttonReset = new JButton(Constants.RESET);
+        buttonReset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onPressedReset();
+            }
+        });
 
         gridBagConstraints.gridwidth = 1;
         gridBagConstraints.weightx = .5;
@@ -377,11 +395,12 @@ public class ERSStudioReleaseHelperUI {
 
         textAreaStatusDA = new JTextArea();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipady = 100;
         gridBagConstraints.weightx = 0.0;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
+        gridBagConstraints.insets = new Insets(0, 10, 0, 10);
+        textAreaStatusDA.setPreferredSize(new Dimension(0, 100));
         panelDataArchitect.add(textAreaStatusDA, gridBagConstraints);
         textAreaStatusDA.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -393,12 +412,55 @@ public class ERSStudioReleaseHelperUI {
         return panelHelp;
     }
 
+    public void onPressedReset() {
+        if (tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex()) == Constants.TEAM_SERVER) {
+            textFieldTS.setText("");
+            textFieldTS.setBackground(Color.WHITE);
+            textVersionStringTS.setText("");
+            textVersionStringTS.setBackground(Color.WHITE);
+            textNewVersionStringTS.setText("");
+            textNewVersionStringTS.setBackground(Color.WHITE);
+            buttonGroupUpgradeTypeTS.clearSelection();
+            textGUIDTS.setText("");
+            textGUIDTS.setBackground(Color.WHITE);
+        }
+        if (tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex()) == Constants.DATA_ARCHITECT) {
+
+        }
+    }
+
+    // map the components from GUI to the model
+    public void copyComponentsFromGUI(VersionInputModel versionInputModel) {
+        if (radioButtonMajorMinorUpgradeTS.isSelected()) {
+            versionInputModel.setUpgradeType(UpgradeTypeEnum.MAJOR_OR_MINOR_UPGRADE);
+        } else {
+            versionInputModel.setUpgradeType(UpgradeTypeEnum.PATCH_UPGRADE);
+        }
+        if (textFieldTS != null)
+            versionInputModel.setFilePath(textFieldTS.getText());
+        if (textVersionStringTS != null)
+            versionInputModel.setOldVersion(textVersionStringTS.getText());
+        if (textNewVersionStringTS != null)
+            versionInputModel.setNewVersion(textNewVersionStringTS.getText());
+        if (textGUIDTS != null)
+            versionInputModel.setGUID(textGUIDTS.getText());
+    }
+
     public void onPressedChangeVersion() {
-        // need to be set from text fields by darpan
         if (validateInput(tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex()))) {
-            VersionInputModel versionInputModel = new VersionInputModel("C:\\Idera\\ERStudioFiles", "20.2.2.0", "20.2.3.0", "1234", UpgradeTypeEnum.MAJOR_OR_MINOR_UPGRADE);
+            VersionInputModel versionInputModel = new VersionInputModel("", "", "", "", UpgradeTypeEnum.PATCH_UPGRADE);
+            copyComponentsFromGUI(versionInputModel);
             ChangeTSVersionNumber changeTSVersionNumber = new ChangeTSVersionNumber(versionInputModel);
             List<String> response = changeTSVersionNumber.changeVersion(versionInputModel);
+            updateStatusText(response);
+        }
+    }
+
+    public void updateStatusText(List<String> response) {
+        String responseStringFinal = "";
+        for (String responeString : response) {
+            responseStringFinal += "\n" + responeString;
+            textAreaStatusTS.setText(responseStringFinal);
         }
     }
 
@@ -485,7 +547,7 @@ public class ERSStudioReleaseHelperUI {
         mainFrame = new JFrame(Constants.ERS_STUDIO_RELEASE_HELPER);
 
         tabbedPaneUI = new JTabbedPane();
-        tabbedPaneUI.setBounds(50, 50, 600, 570);
+        tabbedPaneUI.setBounds(50, 50, 570, 570);
 
         JPanel panelTeamServerUI = initTeamServerUI();
         JPanel panelDataArchitectUI = initDataArchitectUI();
@@ -496,7 +558,7 @@ public class ERSStudioReleaseHelperUI {
         tabbedPaneUI.add(Constants.HELP, panelHelpUI);
 
         mainFrame.add(tabbedPaneUI);
-        mainFrame.setSize(600, 570);
+        mainFrame.setSize(570, 570);
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

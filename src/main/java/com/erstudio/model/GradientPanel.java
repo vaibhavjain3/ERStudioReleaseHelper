@@ -1,5 +1,9 @@
 package main.java.com.erstudio.model;
 
+/**
+ * @author akshit.arora
+ * for the Gradient Panel
+ */
 import javax.swing.*;
 import java.awt.*;
 
