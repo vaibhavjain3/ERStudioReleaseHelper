@@ -2,6 +2,10 @@ package main.java.com.erstudio.model;
 
 import main.java.com.erstudio.constants.Constants;
 
+/**
+ * @author akshit.arora
+ * for upgrade type Enum
+ */
 public enum UpgradeTypeEnum {
 
     MAJOR_OR_MINOR_UPGRADE(Constants.MAJOR_OR_MINOR_UPGRADE),
