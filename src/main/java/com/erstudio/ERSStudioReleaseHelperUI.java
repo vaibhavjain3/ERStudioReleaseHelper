@@ -223,6 +223,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         textAreaStatusTS.setPreferredSize(new Dimension(0, 150));
+        textAreaStatusTS.setEditable(false);
+        textAreaStatusTS.setBackground(Color.WHITE);
         scrollPaneStatus = new JScrollPane(textAreaStatusTS);
         panelTeamServer.add(scrollPaneStatus, gridBagConstraints);
 
@@ -401,6 +403,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridy = 7;
         gridBagConstraints.insets = new Insets(0, 10, 0, 10);
         textAreaStatusDA.setPreferredSize(new Dimension(0, 100));
+        textAreaStatusDA.setEditable(false);
+        textAreaStatusDA.setBackground(Color.WHITE);
         panelDataArchitect.add(textAreaStatusDA, gridBagConstraints);
         textAreaStatusDA.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
