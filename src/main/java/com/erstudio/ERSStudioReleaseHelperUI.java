@@ -191,6 +191,7 @@ public class ERSStudioReleaseHelperUI {
                 onPressedChangeVersion();
             }
         });
+
         buttonReset = new JButton(Constants.RESET);
         buttonReset.addActionListener(new ActionListener() {
             @Override
@@ -408,7 +409,7 @@ public class ERSStudioReleaseHelperUI {
     }
 
     public JPanel initHelpUI() {
-        panelHelp = new JPanel();
+        panelHelp = new GradientPanel();
         return panelHelp;
     }
 
@@ -423,9 +424,20 @@ public class ERSStudioReleaseHelperUI {
             buttonGroupUpgradeTypeTS.clearSelection();
             textGUIDTS.setText("");
             textGUIDTS.setBackground(Color.WHITE);
+            textAreaStatusTS.setText("");
         }
         if (tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex()) == Constants.DATA_ARCHITECT) {
-
+            textFieldDA.setText("");
+            textFieldDA.setBackground(Color.white);
+            textVersionStringDA.setText("");
+            textVersionStringDA.setBackground(Color.WHITE);
+            textNewVersionStringDA.setText("");
+            textNewVersionStringDA.setBackground(Color.WHITE);
+            textNewVersionStringDA.setBackground(Color.WHITE);
+            buttonGroupUpgradeTypeDA.clearSelection();
+            textGUIDDA.setText("");
+            textGUIDDA.setBackground(Color.WHITE);
+            textAreaStatusDA.setText("");
         }
     }
 
@@ -448,6 +460,7 @@ public class ERSStudioReleaseHelperUI {
 
     public void onPressedChangeVersion() {
         if (validateInput(tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex()))) {
+            textAreaStatusTS.setText("");
             VersionInputModel versionInputModel = new VersionInputModel("", "", "", "", UpgradeTypeEnum.PATCH_UPGRADE);
             copyComponentsFromGUI(versionInputModel);
             ChangeTSVersionNumber changeTSVersionNumber = new ChangeTSVersionNumber(versionInputModel);
