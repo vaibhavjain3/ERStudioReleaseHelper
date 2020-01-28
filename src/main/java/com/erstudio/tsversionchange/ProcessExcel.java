@@ -74,14 +74,15 @@ public class ProcessExcel {
             });
         } catch (IOException e) {
             e.printStackTrace();
-            throw new Exception("excel file is either open/delete or corrupted");
-        } /*finally {
+            throw new Exception();
+        } finally {
             try {
                 workbook.close();
             } catch (IOException e) {
                 e.printStackTrace();
-            }*/
+            }
 
-        return fileList;
+            return fileList;
+        }
     }
 }

@@ -475,7 +475,8 @@ public class ERSStudioReleaseHelperUI {
                 changeTSVersionNumber = new ChangeTSVersionNumber(versionInputModel);
                 response = changeTSVersionNumber.changeVersion(versionInputModel);
             } catch (Exception e) {
-                response.add(e.getMessage());
+                e.printStackTrace();
+                response.add("excel file is either open/delete or corrupted");
             } finally {
                 updateStatusText(response);
             }
