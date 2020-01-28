@@ -11,11 +11,13 @@ import main.java.com.erstudio.model.GradientPanel;
 import main.java.com.erstudio.tsversionchange.ChangeTSVersionNumber;
 import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
 import main.java.com.erstudio.utility.InputUtils;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ERSStudioReleaseHelperUI {
@@ -467,13 +469,22 @@ public class ERSStudioReleaseHelperUI {
             textAreaStatusTS.setText("");
             VersionInputModel versionInputModel = new VersionInputModel("", "", "", "", UpgradeTypeEnum.PATCH_UPGRADE);
             copyComponentsFromGUI(versionInputModel);
-            ChangeTSVersionNumber changeTSVersionNumber = new ChangeTSVersionNumber(versionInputModel);
-            List<String> response = changeTSVersionNumber.changeVersion(versionInputModel);
-            updateStatusText(response);
+            List<String> response = new ArrayList<>();
+            ChangeTSVersionNumber changeTSVersionNumber = null;
+            try {
+                changeTSVersionNumber = new ChangeTSVersionNumber(versionInputModel);
+                response = changeTSVersionNumber.changeVersion(versionInputModel);
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.add("excel file is either open/delete or corrupted");
+            } finally {
+                updateStatusText(response);
+            }
         }
     }
 
     public void updateStatusText(List<String> response) {
+        textAreaStatusTS.setText("");
         String responseStringFinal = "";
         for (String responeString : response) {
             responseStringFinal += "\n" + responeString;

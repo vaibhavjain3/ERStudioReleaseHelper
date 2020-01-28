@@ -22,7 +22,7 @@ public class Constants {
     public static final String DATA_ARCHITECT = "Data Architect";
     public static final String HELP = "Help";
     public static final String ERS_STUDIO_RELEASE_HELPER = "ERS Studio Release Helper";
-    public static final String VERSION_HELPER_SHEET = "D:\\ERStudioReleaseHelper\\ERStudio.xlsx";
+    public static final String VERSION_HELPER_SHEET = "\\ERStudio.xlsx";
     public static final String ERS_STUDIO_RELEASE_VERSION_PATTERN = "^(?!0+\\d)\\d+(?:\\.(?![1-9]*0+$))?\\.(?!0+\\d)\\d+(?:\\.(?![1-9]*0+$))?\\.(?!0+\\d)\\d+(?:\\.(?![1-9]*0+$))?\\.(?!0+\\d)\\d+(?:\\.(?![1-9]*0+$))?$";
     public static final String ERS_STUDIO_DIRECTORY_CONFIGURATOR = "configurator";
     public static final String ERS_STUDIO_DIRECTORY_ERSPORTAL = "ersportal";

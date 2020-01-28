@@ -3,6 +3,7 @@ package main.java.com.erstudio.tsversionchange;
 import main.java.com.erstudio.tsversionchange.model.ExcelModel;
 import main.java.com.erstudio.tsversionchange.model.VersionFormat;
 import org.apache.poi.ss.usermodel.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
 public class ProcessExcel {
     List<ExcelModel> processedExcelList;
 
-    public ProcessExcel(String excelFilePath) {
+    public ProcessExcel(String excelFilePath) throws Exception {
         this.processedExcelList = processExcelFile(excelFilePath);
     }
 
@@ -28,9 +29,11 @@ public class ProcessExcel {
         this.processedExcelList = processedExcelList;
     }
 
-    public List<ExcelModel> processExcelFile(String SAMPLE_XLSX_FILE_PATH) {
+    public List<ExcelModel> processExcelFile(String SAMPLE_XLSX_FILE) throws Exception {
 
         List<ExcelModel> fileList = new ArrayList<>();
+        File directory = new File("");
+        String SAMPLE_XLSX_FILE_PATH = directory.getAbsolutePath() + SAMPLE_XLSX_FILE;
         // Creating a Workbook from an Excel file (.xls or .xlsx)
         Workbook workbook = null;
         try {
@@ -71,13 +74,15 @@ public class ProcessExcel {
             });
         } catch (IOException e) {
             e.printStackTrace();
+            throw new Exception();
         } finally {
             try {
                 workbook.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            return fileList;
         }
-        return fileList;
     }
 }
