@@ -1,14 +1,15 @@
 package main.java.com.erstudio.tsversionchange;
 
-import main.java.com.erstudio.tsversionchange.model.ExcelModel;
-import main.java.com.erstudio.tsversionchange.model.VersionFormat;
-import org.apache.poi.ss.usermodel.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.poi.ss.usermodel.*;
+
+import main.java.com.erstudio.tsversionchange.model.ExcelModel;
+import main.java.com.erstudio.tsversionchange.model.VersionFormat;
 
 /**
  * @author rajat.batra
@@ -33,7 +34,7 @@ public class ProcessExcel {
 
         List<ExcelModel> fileList = new ArrayList<>();
         File directory = new File("");
-        String SAMPLE_XLSX_FILE_PATH = directory.getAbsolutePath() + SAMPLE_XLSX_FILE;
+        String SAMPLE_XLSX_FILE_PATH = directory.getAbsolutePath() +SAMPLE_XLSX_FILE;
         // Creating a Workbook from an Excel file (.xls or .xlsx)
         Workbook workbook = null;
         try {
@@ -57,7 +58,8 @@ public class ProcessExcel {
                         dataFormatter.formatCellValue(cell1);
                         // file path
                         Cell cell2 = cellIterator.next();
-                        excelModel.setFilepath(dataFormatter.formatCellValue(cell2));
+                        String path = "\\"+dataFormatter.formatCellValue(cell2);
+                        excelModel.setFilepath(path.trim());
                         // full version : true/false
                         Cell cell3 = cellIterator.next();
                         excelModel.setFullVersion(dataFormatter.formatCellValue(cell3));

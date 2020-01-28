@@ -228,7 +228,10 @@ public class ERSStudioReleaseHelperUI {
         textAreaStatusTS.setPreferredSize(new Dimension(0, 150));
         textAreaStatusTS.setEditable(false);
         textAreaStatusTS.setBackground(Color.WHITE);
-        scrollPaneStatus = new JScrollPane(textAreaStatusTS);
+        scrollPaneStatus = new JScrollPane(textAreaStatusTS,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPaneStatus.getVerticalScrollBar().setUnitIncrement(30);
+        scrollPaneStatus.getHorizontalScrollBar().setUnitIncrement(30);
+        scrollPaneStatus.setPreferredSize(new Dimension(0, 150));
         panelTeamServer.add(scrollPaneStatus, gridBagConstraints);
 
         return panelTeamServer;
