@@ -5,6 +5,7 @@ import main.java.com.erstudio.tsversionchange.Exception.VersionChangeException;
 import main.java.com.erstudio.tsversionchange.model.ExcelModel;
 import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
 import main.java.com.erstudio.tsversionchange.model.VersionFormat;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -23,7 +24,7 @@ public class ChangeTSVersionNumber {
 
     ProcessExcel processExcel;
 
-    public ChangeTSVersionNumber(VersionInputModel versionInputModel) {
+    public ChangeTSVersionNumber(VersionInputModel versionInputModel) throws Exception {
         // processing excel file
         this.processExcel = new ProcessExcel(Constants.VERSION_HELPER_SHEET);
     }
@@ -46,9 +47,8 @@ public class ChangeTSVersionNumber {
             backUpFiles(source, target);
         });
 
-       // processExcel.getProcessedExcelList().forEach(row ->
-        for(ExcelModel row:processExcel.getProcessedExcelList())
-        {
+        // processExcel.getProcessedExcelList().forEach(row ->
+        for (ExcelModel row : processExcel.getProcessedExcelList()) {
             VersionFormat oldVersion = MapVersionFormat(versionInputModel.getOldVersion());
             VersionFormat newVersion = MapVersionFormat(versionInputModel.getNewVersion());
             String versionFormat = row.getVersionFormat().getFormat();
@@ -64,10 +64,10 @@ public class ChangeTSVersionNumber {
                 response.add("restoring backup files...");
                 restoreBackUpFiles(versionInputModel);
                 response.add("all files are rolled back.");
-                break;
-
+                return response;
             }
         }
+        response.add("version changed from " + versionInputModel.getOldVersion() + " --> " + versionInputModel.getNewVersion());
         return response;
     }
 
