@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author shrey.pasari
@@ -83,7 +84,7 @@ public class ChangeTSVersionNumber {
         String content = null;
         try {
             content = new String(Files.readAllBytes(path), charset);
-            content = content.replaceAll(search, replace);
+            content = content.replaceAll(Pattern.quote(search), replace);
             Files.write(path, content.getBytes(charset));
             response.add("Successfully changed version in file " + filepath);
         } catch (Exception e) {
