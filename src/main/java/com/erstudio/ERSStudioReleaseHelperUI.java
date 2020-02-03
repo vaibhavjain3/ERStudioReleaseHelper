@@ -5,12 +5,14 @@ package main.java.com.erstudio;
  * for the UI Skeleton
  */
 
+import main.java.com.erstudio.UUIDGenerator.UUIDGenerator;
 import main.java.com.erstudio.constants.Constants;
 import main.java.com.erstudio.model.UpgradeTypeEnum;
 import main.java.com.erstudio.model.GradientPanel;
 import main.java.com.erstudio.tsversionchange.ChangeTSVersionNumber;
 import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
 import main.java.com.erstudio.utility.InputUtils;
+import org.apache.commons.codec.binary.StringUtils;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
@@ -19,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ERSStudioReleaseHelperUI {
 
@@ -161,6 +164,12 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridy = 4;
         buttonGenerate.setPreferredSize(new Dimension(100, 25));
         panelTeamServer.add(buttonGenerate, gridBagConstraints);
+        buttonGenerate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onPressedGenerateUUID();
+            }
+        });
 
         buttonGroupUpgradeTypeTS = new ButtonGroup();
         radioButtonMajorMinorUpgradeTS = new JRadioButton(Constants.MAJOR_OR_MINOR_UPGRADE);
@@ -462,6 +471,13 @@ public class ERSStudioReleaseHelperUI {
             versionInputModel.setNewVersion(textNewVersionStringTS.getText());
         if (textGUIDTS != null)
             versionInputModel.setGUID(textGUIDTS.getText());
+    }
+
+    public void onPressedGenerateUUID() {
+        UUID guid = UUIDGenerator.generateUUID();
+        String strGuid  =UUIDGenerator.toEllipsis(guid, 28, 6);
+        textGUIDTS.setText(strGuid);
+        textGUIDTS.setToolTipText(guid.toString());
     }
 
     public void onPressedChangeVersion() {
