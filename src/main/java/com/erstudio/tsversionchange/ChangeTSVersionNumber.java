@@ -54,9 +54,9 @@ public class ChangeTSVersionNumber {
             VersionFormat newVersion = MapVersionFormat(versionInputModel.getNewVersion());
             String versionFormat = row.getVersionFormat().getFormat();
             String oldVersionString = versionFormat.replace("Major", oldVersion.getMajorVersion()).replace("Minor", oldVersion.getMinorVersion())
-                    .replace("Patch", oldVersion.getRevisionNumber()).replace("BuildNumberUpdate", oldVersion.getBuildNumber());
+                    .replace("Patch", oldVersion.getRevisionNumber()).replace("BuildNumber", oldVersion.getBuildNumber());
             String newVersionString = versionFormat.replace("Major", newVersion.getMajorVersion()).replace("Minor", newVersion.getMinorVersion())
-                    .replace("Patch", newVersion.getRevisionNumber()).replace("BuildNumberUpdate", newVersion.getBuildNumber());
+                    .replace("Patch", newVersion.getRevisionNumber()).replace("BuildNumber", newVersion.getBuildNumber());
             String filepath = versionInputModel.getFilePath() + row.getFilepath();
             try {
                 replaceVersionInFile(filepath, oldVersionString, newVersionString, response);
