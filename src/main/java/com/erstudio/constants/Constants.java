@@ -29,6 +29,7 @@ public class Constants {
     public static final String ERS_STUDIO_DIRECTORY_VALIDATION_ERROR = "Select a valid TS Directory";
     public static final String ERS_STUDIO_CHANGE_VERSION_VALIDATION_ERROR = "Enter a valid TS Version Number";
     public static final String ERS_STUDIO_NEW_VERSION_VALIDATION_ERROR = "Enter a valid TS Version Number";
+    public static final String ERS_STUDIO_PRODUCT_ID = "ProductId";
     public static final String DA_RELEASE_VERSION_PATTERN = "^(?!0+\\d)\\d+(?:\\.(?![1-9]*0+$))?\\.(?!0+\\d)\\d+(?:\\.(?![1-9]*0+$))?\\.(?!0+\\d)\\d+(?:\\.(?![1-9]*0+$))?\\.(?!0+\\d)\\d+(?:\\.(?![1-9]*0+$))?$";
     public static final String DA_DIRECTORY_VALIDATION_ERROR = "Select a valid DA Directory";
     public static final String DA_CHANGE_VERSION_VALIDATION_ERROR = "Enter a valid DA Version Number";
@@ -37,4 +38,6 @@ public class Constants {
     public static final String DA_DIRECTORY_SOLUTION = "Solution";
     public static final String DA_DIRECTORY_ER1CORE = "ER1Core";
     public static final String DA_FILE_ERDTREPO = "ERDTRepo.sln";
+    public static final String OPERATION_TYPE_VERSION_CHANGE = "Version Change";
+    public static final String OPERATION_TYPE_GUID_UPDATE = "GUID Update";
 }
