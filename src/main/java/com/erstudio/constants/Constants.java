@@ -40,4 +40,5 @@ public class Constants {
     public static final String DA_FILE_ERDTREPO = "ERDTRepo.sln";
     public static final String OPERATION_TYPE_VERSION_CHANGE = "Version Change";
     public static final String OPERATION_TYPE_GUID_UPDATE = "GUID Update";
+    public static final String OPERATION_TYPE_ADD_VERSION = "Add Version";
 }
