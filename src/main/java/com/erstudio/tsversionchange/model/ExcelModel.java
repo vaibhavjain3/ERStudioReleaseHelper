@@ -9,6 +9,8 @@ public class ExcelModel {
     String fullVersion;
     String patchVersion;
     VersionFormat versionFormat;
+    String customData;
+    String operationType;
 
     public String getFilepath() {
         return filepath;
@@ -40,5 +42,21 @@ public class ExcelModel {
 
     public void setVersionFormat(VersionFormat versionFormat) {
         this.versionFormat = versionFormat;
+    }
+
+    public String getCustomData() {
+        return customData;
+    }
+
+    public void setCustomData(String customData) {
+        this.customData = customData;
+    }
+
+    public String getOperationType() {
+        return operationType;
+    }
+
+    public void setOperationType(String operationType) {
+        this.operationType = operationType;
     }
 }
