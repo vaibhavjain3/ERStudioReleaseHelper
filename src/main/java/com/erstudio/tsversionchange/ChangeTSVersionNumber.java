@@ -232,7 +232,7 @@ public class ChangeTSVersionNumber {
 		    response.add("Successfully added version in file " + filepath);
 		 } catch (Exception e) {
 			response.add("\nError in adding version in file.");
-            response.add(e.toString() + "\n");
+			response.add(e.toString() + "\n");
 			throw new VersionChangeException(e.getMessage());
 		 }
 	}
