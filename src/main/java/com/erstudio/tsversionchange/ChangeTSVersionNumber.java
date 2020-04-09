@@ -87,6 +87,24 @@ public class ChangeTSVersionNumber {
                     response.add("all files are rolled back.");
                     return response;
                 }
+            } else if (row.getOperationType().equals(Constants.OPERATION_TYPE_ADD_VERSION)) {
+            	 VersionFormat oldVersion = MapVersionFormat(versionInputModel.getOldVersion());
+                 VersionFormat newVersion = MapVersionFormat(versionInputModel.getNewVersion());
+                 String versionFormat = row.getCustomData();
+                 String oldVersionString = versionFormat.replace("Major", oldVersion.getMajorVersion()).replace("Minor", oldVersion.getMinorVersion())
+                         .replace("Patch", oldVersion.getRevisionNumber()).replace("BuildNumber", oldVersion.getBuildNumber());
+                 String newVersionString = versionFormat.replace("Major", newVersion.getMajorVersion()).replace("Minor", newVersion.getMinorVersion())
+                         .replace("Patch", newVersion.getRevisionNumber()).replace("BuildNumber", newVersion.getBuildNumber());
+                 String filepath = versionInputModel.getFilePath() + row.getFilepath();
+                 try {
+                	 addNewVersionInFile(filepath, oldVersionString, newVersionString, response);
+                 } catch (VersionChangeException e) {
+                     e.printStackTrace();
+                     response.add("restoring backup files...");
+                     restoreBackUpFiles(versionInputModel);
+                     response.add("all files are rolled back.");
+                     return response;
+                 }
             }
         }
         response.add("version changed from " + versionInputModel.getOldVersion() + " --> " + versionInputModel.getNewVersion());
@@ -172,4 +190,29 @@ public class ChangeTSVersionNumber {
         }
         return "";
     }
+    
+private void addNewVersionInFile(String filepath, String oldVersionString, String newVersionString, List<String> response) throws VersionChangeException {
+    	
+		Path path = Paths.get(filepath);
+		Charset charset = StandardCharsets.UTF_8;
+		
+		String oldVersion = ".add( \""+oldVersionString+"\" )";
+		String newVersion = "\n\t\t\t.add( \""+newVersionString+"\" )";
+		String content = null;
+		String newContent = null;
+		try {
+			content = new String(Files.readAllBytes(path), charset);
+			int firstIndex = content.indexOf(oldVersion);
+			StringBuffer newString = new StringBuffer(content); 
+			newString.insert(firstIndex + oldVersion.length(), newVersion); 
+	  
+			// return the modified String 
+			newContent = newString.toString();
+			Files.write(path, newContent.getBytes(charset));
+		    response.add("Successfully added version in file " + filepath);
+		 } catch (Exception e) {
+			response.add("Error in adding version in file " + filepath);
+			throw new VersionChangeException(e.getMessage());
+		 }
+	}
 }
