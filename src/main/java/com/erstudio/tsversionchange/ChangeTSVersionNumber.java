@@ -1,6 +1,7 @@
 package main.java.com.erstudio.tsversionchange;
 
 import main.java.com.erstudio.constants.Constants;
+import main.java.com.erstudio.model.UpgradeTypeEnum;
 import main.java.com.erstudio.tsversionchange.Exception.VersionChangeException;
 import main.java.com.erstudio.tsversionchange.model.ExcelModel;
 import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
@@ -56,6 +57,10 @@ public class ChangeTSVersionNumber {
 
         // processExcel.getProcessedExcelList().forEach(row ->
         for (ExcelModel row : processExcel.getProcessedExcelList()) {
+            //check if current operation is required for the upgrade
+            if (!isOperationRequired(row, versionInputModel)) {
+                continue;
+            }
             //execute each operation
             if(row.getOperationType().equals(Constants.OPERATION_TYPE_VERSION_CHANGE)) {
                 VersionFormat oldVersion = MapVersionFormat(versionInputModel.getOldVersion());
@@ -215,4 +220,12 @@ private void addNewVersionInFile(String filepath, String oldVersionString, Strin
 			throw new VersionChangeException(e.getMessage());
 		 }
 	}
+
+    public boolean isOperationRequired(ExcelModel row, VersionInputModel versionInputModel) {
+        if ((versionInputModel.getUpgradeType().equals(UpgradeTypeEnum.MAJOR_OR_MINOR_UPGRADE) && row.getFullVersion().equals("Yes"))
+                || (versionInputModel.getUpgradeType().equals(UpgradeTypeEnum.PATCH_UPGRADE) && row.getPatchVersion().equals("Yes"))) {
+            return true;
+        }
+        return false;
+    }
 }
