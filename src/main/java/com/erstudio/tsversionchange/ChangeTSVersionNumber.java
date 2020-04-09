@@ -113,7 +113,7 @@ public class ChangeTSVersionNumber {
             } else if (row.getOperationType().equals(Constants.OPERATION_TYPE_PATCH_REPO)) {
                 String filepath = versionInputModel.getFilePath() + row.getFilepath();
                 try {
-                    generatePatchReport(versionInputModel, filepath , response);
+                    generatePatchReport(versionInputModel, filepath , response, row.getCustomData());
                 } catch (Exception e) {
                     e.printStackTrace();
                     response.add("restoring backup files...");
@@ -245,31 +245,40 @@ public class ChangeTSVersionNumber {
         return false;
     }
 
-    private List<String> generatePatchReport(VersionInputModel versionInputModel, String filepath, List<String> response) throws IOException {
-        String inputTemplate = Constants.PATCH_REPO_TEMPLATE_NAME;
+    private List<String> generatePatchReport(VersionInputModel versionInputModel, String filepath, List<String> response, String dbName) throws VersionChangeException {
+        String inputTemplate = "";
+        if (dbName.equals(Constants.SQLSERVER))
+            inputTemplate = Constants.PATCH_REPO_TEMPLATE_NAME_SQLSERVER;
+        else if (dbName.equals(Constants.ORACLE))
+            inputTemplate = Constants.PATCH_REPO_TEMPLATE_NAME_ORACLE;
         String versionNumber = versionInputModel.getNewVersion();
-        var inputPathName = Paths.get(Constants.RESOURCE_FOLDER_PATH, inputTemplate);
+        Path inputPathName = Paths.get(Constants.RESOURCE_FOLDER_PATH, inputTemplate);
         String[] versionSplit = versionNumber.split("\\.");
         String outputFile = filepath + "\\" + Constants.PATCH_REPO_FILE_INITIALS + versionSplit[0] + "_" + versionSplit[1] + "_" + versionSplit[2] +
                 Constants.SQL_FILE_EXTENSION;
         if (new File(outputFile).exists()) {
-            response.add("File already exists");
+            response.add("File already exists :- " + outputFile);
             return response;
         }
-        FileWriter fwOutputFile = new FileWriter(outputFile);
-        FileReader frTemplate = new FileReader(inputPathName.toString());
-        BufferedReader brTemplate = new BufferedReader(frTemplate);
-        String currentLine = brTemplate.readLine();
-        while (currentLine != null) {
-            if (currentLine.contains(Constants.VERSION_STRING)) {
-                currentLine = currentLine.replace(Constants.VERSION_STRING, "\'" + versionSplit[0] + "." + versionSplit[1] + "." + versionSplit[2] + "\'");
+        try {
+            FileWriter fwOutputFile = new FileWriter(outputFile);
+            FileReader frTemplate = new FileReader(inputPathName.toString());
+            BufferedReader brTemplate = new BufferedReader(frTemplate);
+            String currentLine = brTemplate.readLine();
+            while (currentLine != null) {
+                if (currentLine.contains(Constants.VERSION_STRING)) {
+                    currentLine = currentLine.replace(Constants.VERSION_STRING, "\'" + versionSplit[0] + "." + versionSplit[1] + "." + versionSplit[2] + "\'");
+                }
+                fwOutputFile.write(currentLine + "\n");
+                currentLine = brTemplate.readLine();
             }
-            fwOutputFile.write(currentLine + "\n");
-            currentLine = brTemplate.readLine();
-        }
 
-        fwOutputFile.close();
-        response.add("Successfully generated the patchRepo files");
-        return response;
+            fwOutputFile.close();
+            response.add("Successfully generated the patchRepo file:- " + outputFile);
+            return response;
+        } catch (Exception e) {
+            response.add("Error in generating Patch repo file:- " + outputFile);
+            throw new VersionChangeException(e.getMessage());
+        }
     }
 }
