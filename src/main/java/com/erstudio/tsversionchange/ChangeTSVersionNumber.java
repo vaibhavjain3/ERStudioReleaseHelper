@@ -207,7 +207,7 @@ public class ChangeTSVersionNumber {
         return "";
     }
     
-private void addNewVersionInFile(String filepath, String oldVersionString, String newVersionString, List<String> response) throws VersionChangeException {
+    private void addNewVersionInFile(String filepath, String oldVersionString, String newVersionString, List<String> response) throws VersionChangeException {
     	
 		Path path = Paths.get(filepath);
 		Charset charset = StandardCharsets.UTF_8;

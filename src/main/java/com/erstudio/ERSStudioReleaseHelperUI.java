@@ -582,7 +582,7 @@ public class ERSStudioReleaseHelperUI {
                 radioButtonMajorMinorUpgradeTS.setBackground(Color.WHITE);
                 radioButtonMajorMinorUpgradeTS.setToolTipText(null);
             }
-            if (radioButtonMajorMinorUpgradeTS.isSelected() && textGUIDTS.getText().isBlank()) {
+            if (radioButtonMajorMinorUpgradeTS.isSelected() && textGUIDTS.getText().isEmpty()) {
                 textGUIDTS.setBackground(new Color(255, 153, 153));
                 textGUIDTS.setToolTipText(Constants.ERS_STUDIO_GUID_VALIDATION_ERROR);
                 validationFlag = false;
