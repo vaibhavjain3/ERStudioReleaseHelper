@@ -475,6 +475,12 @@ public class ERSStudioReleaseHelperUI {
             versionInputModel.setNewVersion(textNewVersionStringTS.getText());
         if (textGUIDTS != null)
             versionInputModel.setGUID(textGUIDTS.getToolTipText());
+        if(radioButtonMajorMinorUpgradeTS.isSelected()){
+            versionInputModel.setUpgradeType(UpgradeTypeEnum.MAJOR_OR_MINOR_UPGRADE);
+        }
+        if(radioButtonPatchUpgradeTS.isSelected()){
+            versionInputModel.setUpgradeType(UpgradeTypeEnum.PATCH_UPGRADE);
+        }
     }
 
     public void onPressedGenerateUUID() {
@@ -563,6 +569,25 @@ public class ERSStudioReleaseHelperUI {
             } else {
                 textNewVersionStringTS.setBackground(Color.WHITE);
                 textNewVersionStringTS.setToolTipText(null);
+            }
+            if (buttonGroupUpgradeTypeTS.getSelection() == null) {
+                radioButtonPatchUpgradeTS.setBackground(new Color(255, 153, 153));
+                radioButtonPatchUpgradeTS.setToolTipText(Constants.ERS_STUDIO_UPGRADE_TYPE_VALIDATION_ERROR);
+                radioButtonMajorMinorUpgradeTS.setBackground(new Color(255, 153, 153));
+                radioButtonMajorMinorUpgradeTS.setToolTipText(Constants.ERS_STUDIO_UPGRADE_TYPE_VALIDATION_ERROR);
+                validationFlag = false;
+            } else {
+                radioButtonPatchUpgradeTS.setBackground(Color.WHITE);
+                radioButtonPatchUpgradeTS.setToolTipText(null);
+                radioButtonMajorMinorUpgradeTS.setBackground(Color.WHITE);
+                radioButtonMajorMinorUpgradeTS.setToolTipText(null);
+            }
+            if (radioButtonMajorMinorUpgradeTS.isSelected() && textGUIDTS.getText().isBlank()) {
+                textGUIDTS.setBackground(new Color(255, 153, 153));
+                textGUIDTS.setToolTipText(Constants.ERS_STUDIO_GUID_VALIDATION_ERROR);
+                validationFlag = false;
+            } else {
+                textGUIDTS.setBackground(Color.WHITE);
             }
         }
 
