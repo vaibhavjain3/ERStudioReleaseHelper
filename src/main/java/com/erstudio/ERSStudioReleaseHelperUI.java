@@ -10,6 +10,7 @@ import main.java.com.erstudio.constants.Constants;
 import main.java.com.erstudio.model.UpgradeTypeEnum;
 import main.java.com.erstudio.model.GradientPanel;
 import main.java.com.erstudio.tsversionchange.ChangeTSVersionNumber;
+import main.java.com.erstudio.tsversionchange.UpdateTSExcelGUID;
 import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
 import main.java.com.erstudio.utility.InputUtils;
 import org.apache.commons.codec.binary.StringUtils;
@@ -473,14 +474,19 @@ public class ERSStudioReleaseHelperUI {
         if (textNewVersionStringTS != null)
             versionInputModel.setNewVersion(textNewVersionStringTS.getText());
         if (textGUIDTS != null)
-            versionInputModel.setGUID(textGUIDTS.getText());
+            versionInputModel.setGUID(textGUIDTS.getToolTipText());
     }
 
     public void onPressedGenerateUUID() {
         UUID guid = UUIDGenerator.generateUUID();
         String strGuid  =UUIDGenerator.toEllipsis(guid, 28, 6);
-        textGUIDTS.setText(strGuid);
-        textGUIDTS.setToolTipText(guid.toString());
+        if (tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex()) == Constants.TEAM_SERVER) {
+            UpdateTSExcelGUID updateTSExcelGUID = new UpdateTSExcelGUID(Constants.VERSION_HELPER_SHEET);
+            List<String> response = updateTSExcelGUID.update(guid);
+            updateStatusText(response);
+        }
+        textGUIDTS.setText(strGuid.toUpperCase());
+        textGUIDTS.setToolTipText(guid.toString().toUpperCase());
     }
 
     public void onPressedChangeVersion() {
