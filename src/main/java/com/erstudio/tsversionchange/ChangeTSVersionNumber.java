@@ -7,8 +7,7 @@ import main.java.com.erstudio.tsversionchange.model.ExcelModel;
 import main.java.com.erstudio.tsversionchange.model.VersionInputModel;
 import main.java.com.erstudio.tsversionchange.model.VersionFormat;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -20,6 +19,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -62,7 +62,7 @@ public class ChangeTSVersionNumber {
                 continue;
             }
             //execute each operation
-            if(row.getOperationType().equals(Constants.OPERATION_TYPE_VERSION_CHANGE)) {
+            if (row.getOperationType().equals(Constants.OPERATION_TYPE_VERSION_CHANGE)) {
                 VersionFormat oldVersion = MapVersionFormat(versionInputModel.getOldVersion());
                 VersionFormat newVersion = MapVersionFormat(versionInputModel.getNewVersion());
                 String versionFormat = row.getVersionFormat().getFormat();
@@ -110,6 +110,17 @@ public class ChangeTSVersionNumber {
                      response.add("all files are rolled back.");
                      return response;
                  }
+            } else if (row.getOperationType().equals(Constants.OPERATION_TYPE_PATCH_REPO)) {
+                String filepath = versionInputModel.getFilePath() + row.getFilepath();
+                try {
+                    generatePatchReport(versionInputModel, filepath , response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    response.add("restoring backup files...");
+                    restoreBackUpFiles(versionInputModel);
+                    response.add("all files are rolled back.");
+                    return response;
+                }
             }
         }
         response.add("version changed from " + versionInputModel.getOldVersion() + " --> " + versionInputModel.getNewVersion());
@@ -227,5 +238,33 @@ private void addNewVersionInFile(String filepath, String oldVersionString, Strin
             return true;
         }
         return false;
+    }
+
+    private List<String> generatePatchReport(VersionInputModel versionInputModel, String filepath, List<String> response) throws IOException {
+        String inputTemplate = Constants.PATCH_REPO_TEMPLATE_NAME;
+        String versionNumber = versionInputModel.getNewVersion();
+        var inputPathName = Paths.get(Constants.RESOURCE_FOLDER_PATH, inputTemplate);
+        String[] versionSplit = versionNumber.split("\\.");
+        String outputFile = filepath + "\\" + Constants.PATCH_REPO_FILE_INITIALS + versionSplit[0] + "_" + versionSplit[1] + "_" + versionSplit[2] +
+                Constants.SQL_FILE_EXTENSION;
+        if (new File(outputFile).exists()) {
+            response.add("File already exists");
+            return response;
+        }
+        FileWriter fwOutputFile = new FileWriter(outputFile);
+        FileReader frTemplate = new FileReader(inputPathName.toString());
+        BufferedReader brTemplate = new BufferedReader(frTemplate);
+        String currentLine = brTemplate.readLine();
+        while (currentLine != null) {
+            if (currentLine.contains(Constants.VERSION_STRING)) {
+                currentLine = currentLine.replace(Constants.VERSION_STRING, "\'" + versionSplit[0] + "." + versionSplit[1] + "." + versionSplit[2] + "\'");
+            }
+            fwOutputFile.write(currentLine + "\n");
+            currentLine = brTemplate.readLine();
+        }
+
+        fwOutputFile.close();
+        response.add("Successfully generated the patchRepo files");
+        return response;
     }
 }

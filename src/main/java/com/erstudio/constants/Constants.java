@@ -43,4 +43,10 @@ public class Constants {
     public static final String OPERATION_TYPE_VERSION_CHANGE = "Version Change";
     public static final String OPERATION_TYPE_GUID_UPDATE = "GUID Update";
     public static final String OPERATION_TYPE_ADD_VERSION = "Add Version";
+    public static final String RESOURCE_FOLDER_PATH = "src\\main\\resources\\";
+    public static final String PATCH_REPO_TEMPLATE_NAME = "PatchReportTemplate.txt";
+    public static final String VERSION_STRING = "{version}";
+    public static final String OPERATION_TYPE_PATCH_REPO = "Patch Report";
+    public static final String PATCH_REPO_FILE_INITIALS  = "patchReportRepo_";
+    public static final String SQL_FILE_EXTENSION = ".sql";
 }
