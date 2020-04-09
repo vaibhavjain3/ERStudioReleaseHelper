@@ -185,6 +185,7 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridy = 5;
         radioButtonMajorMinorUpgradeTS.setPreferredSize(new Dimension(150, 25));
         radioButtonMajorMinorUpgradeTS.setOpaque(false);
+        radioButtonMajorMinorUpgradeTS.setSelected(true);
         panelTeamServer.add(radioButtonMajorMinorUpgradeTS, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -235,7 +236,6 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.insets = new Insets(0, 10, 0, 10);
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
-        textAreaStatusTS.setPreferredSize(new Dimension(0, 150));
         textAreaStatusTS.setEditable(false);
         textAreaStatusTS.setBackground(Color.WHITE);
         scrollPaneStatus = new JScrollPane(textAreaStatusTS,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);

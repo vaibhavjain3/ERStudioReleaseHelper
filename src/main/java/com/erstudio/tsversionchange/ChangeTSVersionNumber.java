@@ -143,7 +143,8 @@ public class ChangeTSVersionNumber {
             Files.write(path, content.getBytes(charset));
             response.add("Successfully changed version in file " + filepath);
         } catch (Exception e) {
-            response.add("Error in changing version in file " + filepath);
+            response.add("\nError in changing version in file.");
+            response.add(e.toString() + "\n");
             throw new VersionChangeException(e.getMessage());
         }
         return response;
@@ -168,7 +169,8 @@ public class ChangeTSVersionNumber {
             Files.write(path, content.getBytes(charset));
             response.add("Successfully changed GUID in file " + filepath);
         } catch (Exception e) {
-            response.add("Error in changing GUID in file " + filepath);
+            response.add("\nError in changing GUID in file.");
+            response.add(e.toString() + "\n");
             throw new VersionChangeException(e.getMessage());
         }
         return response;
@@ -178,7 +180,9 @@ public class ChangeTSVersionNumber {
         Path source = Paths.get(sourcePath);
         Path target = Paths.get(targetPath);
         try {
-            Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+            if(!Files.isDirectory(source)) {
+                Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+            }
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -227,7 +231,8 @@ public class ChangeTSVersionNumber {
 			Files.write(path, newContent.getBytes(charset));
 		    response.add("Successfully added version in file " + filepath);
 		 } catch (Exception e) {
-			response.add("Error in adding version in file " + filepath);
+			response.add("\nError in adding version in file.");
+            response.add(e.toString() + "\n");
 			throw new VersionChangeException(e.getMessage());
 		 }
 	}
