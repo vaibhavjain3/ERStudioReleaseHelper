@@ -29,6 +29,8 @@ public class Constants {
     public static final String ERS_STUDIO_DIRECTORY_VALIDATION_ERROR = "Select a valid TS Directory";
     public static final String ERS_STUDIO_CHANGE_VERSION_VALIDATION_ERROR = "Enter a valid TS Version Number";
     public static final String ERS_STUDIO_NEW_VERSION_VALIDATION_ERROR = "Enter a valid TS Version Number";
+    public static final String ERS_STUDIO_UPGRADE_TYPE_VALIDATION_ERROR = "Select TS Upgrade Type";
+    public static final String ERS_STUDIO_GUID_VALIDATION_ERROR = "Generate TS GUID for Major or Minor Upgrade";
     public static final String ERS_STUDIO_PRODUCT_ID = "ProductId";
     public static final String DA_RELEASE_VERSION_PATTERN = "^(?!0+\\d)\\d+(?:\\.(?![1-9]*0+$))?\\.(?!0+\\d)\\d+(?:\\.(?![1-9]*0+$))?\\.(?!0+\\d)\\d+(?:\\.(?![1-9]*0+$))?\\.(?!0+\\d)\\d+(?:\\.(?![1-9]*0+$))?$";
     public static final String DA_DIRECTORY_VALIDATION_ERROR = "Select a valid DA Directory";
