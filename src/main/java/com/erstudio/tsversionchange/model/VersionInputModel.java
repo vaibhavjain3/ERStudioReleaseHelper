@@ -12,14 +12,16 @@ public class VersionInputModel {
     String newVersion;
     String GUID;
     UpgradeTypeEnum upgradeType;
+    String productName;
 
 
-    public VersionInputModel(String filePath, String oldVersion, String newVersion, String GUID, UpgradeTypeEnum upgradeType) {
+	public VersionInputModel(String filePath, String oldVersion, String newVersion, String GUID, UpgradeTypeEnum upgradeType, String productName) {
         this.filePath = filePath;
         this.oldVersion = oldVersion;
         this.newVersion = newVersion;
         this.GUID = GUID;
         this.upgradeType = upgradeType;
+        this.productName = productName;
     }
 
     public String getFilePath() {
@@ -61,4 +63,12 @@ public class VersionInputModel {
     public void setUpgradeType(UpgradeTypeEnum upgradeType) {
         this.upgradeType = upgradeType;
     }
+    
+    public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 }

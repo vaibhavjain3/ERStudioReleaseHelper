@@ -34,7 +34,7 @@ public class ChangeTSVersionNumber {
 
     public ChangeTSVersionNumber(VersionInputModel versionInputModel) throws Exception {
         // processing excel file
-        this.processExcel = new ProcessExcel(Constants.VERSION_HELPER_SHEET);
+        this.processExcel = new ProcessExcel(Constants.VERSION_HELPER_SHEET, versionInputModel.getProductName());
     }
 
     public List<String> changeVersion(VersionInputModel versionInputModel) {
