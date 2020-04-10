@@ -236,6 +236,7 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.insets = new Insets(0, 10, 0, 10);
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
+        textAreaStatusTS.setPreferredSize(new Dimension(0, 150));
         textAreaStatusTS.setEditable(false);
         textAreaStatusTS.setBackground(Color.WHITE);
         scrollPaneStatus = new JScrollPane(textAreaStatusTS,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -462,25 +463,36 @@ public class ERSStudioReleaseHelperUI {
 
     // map the components from GUI to the model
     public void copyComponentsFromGUI(VersionInputModel versionInputModel) {
-        if (radioButtonMajorMinorUpgradeTS.isSelected()) {
-            versionInputModel.setUpgradeType(UpgradeTypeEnum.MAJOR_OR_MINOR_UPGRADE);
-        } else {
-            versionInputModel.setUpgradeType(UpgradeTypeEnum.PATCH_UPGRADE);
-        }
-        if (textFieldTS != null)
-            versionInputModel.setFilePath(textFieldTS.getText());
-        if (textVersionStringTS != null)
-            versionInputModel.setOldVersion(textVersionStringTS.getText());
-        if (textNewVersionStringTS != null)
-            versionInputModel.setNewVersion(textNewVersionStringTS.getText());
-        if (textGUIDTS != null)
-            versionInputModel.setGUID(textGUIDTS.getToolTipText());
-        if(radioButtonMajorMinorUpgradeTS.isSelected()){
-            versionInputModel.setUpgradeType(UpgradeTypeEnum.MAJOR_OR_MINOR_UPGRADE);
-        }
-        if(radioButtonPatchUpgradeTS.isSelected()){
-            versionInputModel.setUpgradeType(UpgradeTypeEnum.PATCH_UPGRADE);
-        }
+    	if(versionInputModel.getProductName().equals(Constants.TEAM_SERVER)) {
+	        if (radioButtonMajorMinorUpgradeTS.isSelected()) {
+	            versionInputModel.setUpgradeType(UpgradeTypeEnum.MAJOR_OR_MINOR_UPGRADE);
+	        } else {
+	            versionInputModel.setUpgradeType(UpgradeTypeEnum.PATCH_UPGRADE);
+	        }
+	        if (textFieldTS != null)
+	            versionInputModel.setFilePath(textFieldTS.getText());
+	        if (textVersionStringTS != null)
+	            versionInputModel.setOldVersion(textVersionStringTS.getText());
+	        if (textNewVersionStringTS != null)
+	            versionInputModel.setNewVersion(textNewVersionStringTS.getText());
+	        if (textGUIDTS != null)
+	            versionInputModel.setGUID(textGUIDTS.getToolTipText());
+    	}
+    	else {
+    		if (radioButtonMajorMinorDA.isSelected()) {
+	            versionInputModel.setUpgradeType(UpgradeTypeEnum.MAJOR_OR_MINOR_UPGRADE);
+	        } else {
+	            versionInputModel.setUpgradeType(UpgradeTypeEnum.PATCH_UPGRADE);
+	        }
+	        if (textFieldDA != null)
+	            versionInputModel.setFilePath(textFieldDA.getText());
+	        if (textVersionStringDA != null)
+	            versionInputModel.setOldVersion(textVersionStringDA.getText());
+	        if (textNewVersionStringDA != null)
+	            versionInputModel.setNewVersion(textNewVersionStringDA.getText());
+	        if (textGUIDDA != null)
+	            versionInputModel.setGUID(textGUIDDA.getToolTipText());
+    	}
     }
 
     public void onPressedGenerateUUID() {
@@ -489,16 +501,17 @@ public class ERSStudioReleaseHelperUI {
         if (tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex()) == Constants.TEAM_SERVER) {
             UpdateTSExcelGUID updateTSExcelGUID = new UpdateTSExcelGUID(Constants.VERSION_HELPER_SHEET);
             List<String> response = updateTSExcelGUID.update(guid);
-            updateStatusText(response);
+            updateStatusText(response, Constants.TEAM_SERVER);
         }
         textGUIDTS.setText(strGuid.toUpperCase());
         textGUIDTS.setToolTipText(guid.toString().toUpperCase());
     }
 
     public void onPressedChangeVersion() {
-        if (validateInput(tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex()))) {
+    	String productName = tabbedPaneUI.getTitleAt(tabbedPaneUI.getSelectedIndex());
+        if (validateInput(productName)) {
             textAreaStatusTS.setText("");
-            VersionInputModel versionInputModel = new VersionInputModel("", "", "", "", UpgradeTypeEnum.PATCH_UPGRADE);
+            VersionInputModel versionInputModel = new VersionInputModel("", "", "", "", UpgradeTypeEnum.PATCH_UPGRADE, productName);
             copyComponentsFromGUI(versionInputModel);
             List<String> response = new ArrayList<>();
             ChangeTSVersionNumber changeTSVersionNumber = null;
@@ -509,17 +522,22 @@ public class ERSStudioReleaseHelperUI {
                 e.printStackTrace();
                 response.add("excel file is either open/delete or corrupted");
             } finally {
-                updateStatusText(response);
+                updateStatusText(response, productName);
             }
         }
     }
 
-    public void updateStatusText(List<String> response) {
-        textAreaStatusTS.setText("");
+    public void updateStatusText(List<String> response, String productName) {
+    	JTextArea status;
+    	if(productName.equals(Constants.TEAM_SERVER))
+    		status = textAreaStatusTS;
+    	else
+    		status = textAreaStatusDA;
+        status.setText("");
         String responseStringFinal = "";
         for (String responeString : response) {
             responseStringFinal += "\n" + responeString;
-            textAreaStatusTS.setText(responseStringFinal);
+            status.setText(responseStringFinal);
         }
     }
 
@@ -615,6 +633,18 @@ public class ERSStudioReleaseHelperUI {
             } else {
                 textNewVersionStringDA.setBackground(Color.WHITE);
                 textNewVersionStringDA.setToolTipText(null);
+            }
+            if (buttonGroupUpgradeTypeDA.getSelection() == null) {
+                radioButtonPatchUpgradeDA.setBackground(new Color(255, 153, 153));
+                radioButtonPatchUpgradeDA.setToolTipText(Constants.ERS_STUDIO_UPGRADE_TYPE_VALIDATION_ERROR);
+                radioButtonMajorMinorDA.setBackground(new Color(255, 153, 153));
+                radioButtonMajorMinorDA.setToolTipText(Constants.ERS_STUDIO_UPGRADE_TYPE_VALIDATION_ERROR);
+                validationFlag = false;
+            } else {
+                radioButtonPatchUpgradeDA.setBackground(Color.WHITE);
+                radioButtonPatchUpgradeDA.setToolTipText(null);
+                radioButtonMajorMinorDA.setBackground(Color.WHITE);
+                radioButtonMajorMinorDA.setToolTipText(null);
             }
         }
 

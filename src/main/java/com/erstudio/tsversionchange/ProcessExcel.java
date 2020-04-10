@@ -36,7 +36,7 @@ public class ProcessExcel {
     	if(Product.equals(Constants.TEAM_SERVER))
     		versionSheetindex = 0;
     	else
-    		versionSheetindex = 1;
+    		versionSheetindex = 2;
         List<ExcelModel> fileList = new ArrayList<>();
         File directory = new File("");
         String SAMPLE_XLSX_FILE_PATH = directory.getAbsolutePath() +SAMPLE_XLSX_FILE;
