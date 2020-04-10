@@ -19,8 +19,8 @@ import main.java.com.erstudio.tsversionchange.model.VersionFormat;
 public class ProcessExcel {
     List<ExcelModel> processedExcelList;
 
-    public ProcessExcel(String excelFilePath) throws Exception {
-        this.processedExcelList = processExcelFile(excelFilePath);
+    public ProcessExcel(String excelFilePath, String product) throws Exception {
+        this.processedExcelList = processExcelFile(excelFilePath, product);
     }
 
     public List<ExcelModel> getProcessedExcelList() {
@@ -31,8 +31,12 @@ public class ProcessExcel {
         this.processedExcelList = processedExcelList;
     }
 
-    public List<ExcelModel> processExcelFile(String SAMPLE_XLSX_FILE) throws Exception {
-
+    public List<ExcelModel> processExcelFile(String SAMPLE_XLSX_FILE, String Product) throws Exception {
+    	int versionSheetindex;
+    	if(Product.equals(Constants.TEAM_SERVER))
+    		versionSheetindex = 0;
+    	else
+    		versionSheetindex = 1;
         List<ExcelModel> fileList = new ArrayList<>();
         File directory = new File("");
         String SAMPLE_XLSX_FILE_PATH = directory.getAbsolutePath() +SAMPLE_XLSX_FILE;
@@ -41,8 +45,9 @@ public class ProcessExcel {
         try {
             workbook = WorkbookFactory.create(new File(SAMPLE_XLSX_FILE_PATH));
 
+            
             // Retrieving the number of sheets in the Workbook
-            Sheet versionSheet = workbook.getSheetAt(0);
+            Sheet versionSheet = workbook.getSheetAt(versionSheetindex);
 
             // Create a DataFormatter to format and get each cell's value as String
             DataFormatter dataFormatter = new DataFormatter();
@@ -78,35 +83,38 @@ public class ProcessExcel {
                 }
             });
 
-            // Retrieving Custom sheet
-            Sheet customSheet = workbook.getSheetAt(1);
-            // iterating over Rows and Columns
-            customSheet.forEach(row -> {
-                //ignore the first header row
-                if (row.getRowNum() != 0) {
-                    Iterator<Cell> cellIterator = row.cellIterator();
-                    ExcelModel excelModel = new ExcelModel();
-                    while (cellIterator.hasNext()) {
-                        Cell cell1 = cellIterator.next();
-                        // custom operation type
-                        excelModel.setOperationType(dataFormatter.formatCellValue(cell1));
-                        // file path
-                        Cell cell2 = cellIterator.next();
-                        String path = "\\" + dataFormatter.formatCellValue(cell2);
-                        excelModel.setFilepath(path.trim());
-                        // full version : true/false
-                        Cell cell3 = cellIterator.next();
-                        excelModel.setFullVersion(dataFormatter.formatCellValue(cell3));
-                        // patch version : true/false
-                        Cell cell4 = cellIterator.next();
-                        excelModel.setPatchVersion(dataFormatter.formatCellValue(cell4));
-                        // GUID to replace
-                        Cell cell5 = cellIterator.next();
-                        excelModel.setCustomData(dataFormatter.formatCellValue(cell5));
-                        fileList.add(excelModel);
-                    }
-                }
-            });
+            if(Product.equals(Constants.TEAM_SERVER)) {
+	            // Retrieving Custom sheet
+	            Sheet customSheet = workbook.getSheetAt(1);
+	            // iterating over Rows and Columns
+	            customSheet.forEach(row -> {
+	                //ignore the first header row
+	                if (row.getRowNum() != 0) {
+	                    Iterator<Cell> cellIterator = row.cellIterator();
+	                    ExcelModel excelModel = new ExcelModel();
+	                    while (cellIterator.hasNext()) {
+	                        Cell cell1 = cellIterator.next();
+	                        // custom operation type
+	                        excelModel.setOperationType(dataFormatter.formatCellValue(cell1));
+	                        // file path
+	                        Cell cell2 = cellIterator.next();
+	                        String path = "\\" + dataFormatter.formatCellValue(cell2);
+	                        excelModel.setFilepath(path.trim());
+	                        // full version : true/false
+	                        Cell cell3 = cellIterator.next();
+	                        excelModel.setFullVersion(dataFormatter.formatCellValue(cell3));
+	                        // patch version : true/false
+	                        Cell cell4 = cellIterator.next();
+	                        excelModel.setPatchVersion(dataFormatter.formatCellValue(cell4));
+	                        // GUID to replace
+	                        Cell cell5 = cellIterator.next();
+	                        excelModel.setCustomData(dataFormatter.formatCellValue(cell5));
+	                        fileList.add(excelModel);
+	                    }
+	                }
+	            });
+            }
+        
         } catch (IOException e) {
             e.printStackTrace();
             throw new Exception();
@@ -119,5 +127,6 @@ public class ProcessExcel {
 
             return fileList;
         }
+	
     }
 }
