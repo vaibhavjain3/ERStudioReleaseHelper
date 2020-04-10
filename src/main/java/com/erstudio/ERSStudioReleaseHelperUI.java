@@ -56,7 +56,8 @@ public class ERSStudioReleaseHelperUI {
     private JPanel panelTeamServer;
     private JPanel panelDataArchitect;
     private JPanel panelHelp;
-    private JScrollPane scrollPaneStatus;
+    private JScrollPane scrollPaneStatusTS;
+    private JScrollPane scrollPaneStatusDA;
 
     public JPanel initTeamServerUI() {
         panelTeamServer = new GradientPanel();
@@ -81,6 +82,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new Insets(0,15,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         panelTeamServer.add(labelTSString, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -88,6 +91,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         textFieldTS.setPreferredSize(new Dimension(200, 30));
         textFieldTS.setBackground(Color.WHITE);
         panelTeamServer.add(textFieldTS, gridBagConstraints);
@@ -97,6 +102,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         buttonBrowse.setPreferredSize(new Dimension(100, 25));
         panelTeamServer.add(buttonBrowse, gridBagConstraints);
 
@@ -109,6 +116,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = 0;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new Insets(0,15,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         panelTeamServer.add(labelVersionString, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -116,6 +125,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = 0;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         textVersionStringTS.setPreferredSize(new Dimension(200, 30));
         panelTeamServer.add(textVersionStringTS, gridBagConstraints);
 
@@ -128,6 +139,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.ipadx = 0;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new Insets(0,15,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         panelTeamServer.add(labelNewVersionString, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -135,6 +148,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         textNewVersionStringTS.setPreferredSize(new Dimension(200, 30));
         panelTeamServer.add(textNewVersionStringTS, gridBagConstraints);
 
@@ -148,6 +163,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.ipadx = 0;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new Insets(0,15,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         panelTeamServer.add(labelGUID, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -155,6 +172,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         textGUIDTS.setPreferredSize(new Dimension(200, 30));
         panelTeamServer.add(textGUIDTS, gridBagConstraints);
 
@@ -163,6 +182,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         buttonGenerate.setPreferredSize(new Dimension(100, 25));
         panelTeamServer.add(buttonGenerate, gridBagConstraints);
         buttonGenerate.addActionListener(new ActionListener() {
@@ -183,7 +204,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        radioButtonMajorMinorUpgradeTS.setPreferredSize(new Dimension(150, 25));
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         radioButtonMajorMinorUpgradeTS.setOpaque(false);
         radioButtonMajorMinorUpgradeTS.setSelected(true);
         panelTeamServer.add(radioButtonMajorMinorUpgradeTS, gridBagConstraints);
@@ -193,6 +215,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         radioButtonPatchUpgradeTS.setPreferredSize(new Dimension(120, 25));
         radioButtonPatchUpgradeTS.setOpaque(false);
         panelTeamServer.add(radioButtonPatchUpgradeTS, gridBagConstraints);
@@ -219,6 +243,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 0;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         panelTeamServer.add(buttonChangeVersion, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -227,6 +253,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         panelTeamServer.add(buttonReset, gridBagConstraints);
 
         textAreaStatusTS = new JTextArea();
@@ -236,14 +264,14 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.insets = new Insets(0, 10, 0, 10);
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
-        textAreaStatusTS.setPreferredSize(new Dimension(0, 150));
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         textAreaStatusTS.setEditable(false);
         textAreaStatusTS.setBackground(Color.WHITE);
-        scrollPaneStatus = new JScrollPane(textAreaStatusTS,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPaneStatus.getVerticalScrollBar().setUnitIncrement(30);
-        scrollPaneStatus.getHorizontalScrollBar().setUnitIncrement(30);
-        scrollPaneStatus.setPreferredSize(new Dimension(0, 150));
-        panelTeamServer.add(scrollPaneStatus, gridBagConstraints);
+        scrollPaneStatusTS = new JScrollPane(textAreaStatusTS,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPaneStatusTS.getVerticalScrollBar().setUnitIncrement(30);
+        scrollPaneStatusTS.getHorizontalScrollBar().setUnitIncrement(30);
+        scrollPaneStatusTS.setPreferredSize(new Dimension(0, 150));
+        panelTeamServer.add(scrollPaneStatusTS, gridBagConstraints);
 
         return panelTeamServer;
     }
@@ -271,6 +299,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new Insets(0,15,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         panelDataArchitect.add(labelDAString, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -278,6 +308,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         textFieldDA.setBackground(Color.WHITE);
         textFieldDA.setPreferredSize(new Dimension(200, 30));
         panelDataArchitect.add(textFieldDA, gridBagConstraints);
@@ -287,6 +319,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         buttonBrowse.setPreferredSize(new Dimension(100, 25));
         panelDataArchitect.add(buttonBrowse, gridBagConstraints);
 
@@ -299,6 +333,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = 0;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new Insets(0,15,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         panelDataArchitect.add(labelVersionString, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -306,6 +342,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = 0;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         textVersionStringDA.setPreferredSize(new Dimension(200, 30));
         panelDataArchitect.add(textVersionStringDA, gridBagConstraints);
 
@@ -318,6 +356,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.ipadx = 0;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new Insets(0,15,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         panelDataArchitect.add(labelNewVersionString, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -325,6 +365,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         textNewVersionStringDA.setPreferredSize(new Dimension(200, 30));
         panelDataArchitect.add(textNewVersionStringDA, gridBagConstraints);
 
@@ -338,6 +380,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.ipadx = 0;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new Insets(0,15,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
         panelDataArchitect.add(labelGUID, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -345,6 +389,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         textGUIDDA.setPreferredSize(new Dimension(200, 30));
         panelDataArchitect.add(textGUIDDA, gridBagConstraints);
 
@@ -353,6 +399,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         buttonGenerate.setPreferredSize(new Dimension(100, 25));
         panelDataArchitect.add(buttonGenerate, gridBagConstraints);
 
@@ -367,8 +415,10 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        radioButtonMajorMinorDA.setPreferredSize(new Dimension(150, 30));
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         radioButtonMajorMinorDA.setOpaque(false);
+        radioButtonMajorMinorDA.setSelected(true);
         panelDataArchitect.add(radioButtonMajorMinorDA, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -376,6 +426,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.weighty = .2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         radioButtonPatchUpgradeDA.setPreferredSize(new Dimension(150, 30));
         radioButtonPatchUpgradeDA.setOpaque(false);
         panelDataArchitect.add(radioButtonPatchUpgradeDA, gridBagConstraints);
@@ -402,6 +454,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 0;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         panelDataArchitect.add(buttonChangeVersion, gridBagConstraints);
 
         gridBagConstraints.gridwidth = 1;
@@ -410,6 +464,8 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new Insets(0,0,0,0);
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         panelDataArchitect.add(buttonReset, gridBagConstraints);
 
         textAreaStatusDA = new JTextArea();
@@ -419,11 +475,14 @@ public class ERSStudioReleaseHelperUI {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.insets = new Insets(0, 10, 0, 10);
-        textAreaStatusDA.setPreferredSize(new Dimension(0, 100));
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         textAreaStatusDA.setEditable(false);
         textAreaStatusDA.setBackground(Color.WHITE);
-        panelDataArchitect.add(textAreaStatusDA, gridBagConstraints);
-        textAreaStatusDA.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        scrollPaneStatusDA = new JScrollPane(textAreaStatusDA,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPaneStatusDA.getVerticalScrollBar().setUnitIncrement(30);
+        scrollPaneStatusDA.getHorizontalScrollBar().setUnitIncrement(30);
+        scrollPaneStatusDA.setPreferredSize(new Dimension(0, 150));
+        panelDataArchitect.add(scrollPaneStatusDA, gridBagConstraints);
 
         return panelDataArchitect;
     }
@@ -588,18 +647,6 @@ public class ERSStudioReleaseHelperUI {
                 textNewVersionStringTS.setBackground(Color.WHITE);
                 textNewVersionStringTS.setToolTipText(null);
             }
-            if (buttonGroupUpgradeTypeTS.getSelection() == null) {
-                radioButtonPatchUpgradeTS.setBackground(new Color(255, 153, 153));
-                radioButtonPatchUpgradeTS.setToolTipText(Constants.ERS_STUDIO_UPGRADE_TYPE_VALIDATION_ERROR);
-                radioButtonMajorMinorUpgradeTS.setBackground(new Color(255, 153, 153));
-                radioButtonMajorMinorUpgradeTS.setToolTipText(Constants.ERS_STUDIO_UPGRADE_TYPE_VALIDATION_ERROR);
-                validationFlag = false;
-            } else {
-                radioButtonPatchUpgradeTS.setBackground(Color.WHITE);
-                radioButtonPatchUpgradeTS.setToolTipText(null);
-                radioButtonMajorMinorUpgradeTS.setBackground(Color.WHITE);
-                radioButtonMajorMinorUpgradeTS.setToolTipText(null);
-            }
             if (radioButtonMajorMinorUpgradeTS.isSelected() && textGUIDTS.getText().isEmpty()) {
                 textGUIDTS.setBackground(new Color(255, 153, 153));
                 textGUIDTS.setToolTipText(Constants.ERS_STUDIO_GUID_VALIDATION_ERROR);
@@ -633,18 +680,6 @@ public class ERSStudioReleaseHelperUI {
             } else {
                 textNewVersionStringDA.setBackground(Color.WHITE);
                 textNewVersionStringDA.setToolTipText(null);
-            }
-            if (buttonGroupUpgradeTypeDA.getSelection() == null) {
-                radioButtonPatchUpgradeDA.setBackground(new Color(255, 153, 153));
-                radioButtonPatchUpgradeDA.setToolTipText(Constants.ERS_STUDIO_UPGRADE_TYPE_VALIDATION_ERROR);
-                radioButtonMajorMinorDA.setBackground(new Color(255, 153, 153));
-                radioButtonMajorMinorDA.setToolTipText(Constants.ERS_STUDIO_UPGRADE_TYPE_VALIDATION_ERROR);
-                validationFlag = false;
-            } else {
-                radioButtonPatchUpgradeDA.setBackground(Color.WHITE);
-                radioButtonPatchUpgradeDA.setToolTipText(null);
-                radioButtonMajorMinorDA.setBackground(Color.WHITE);
-                radioButtonMajorMinorDA.setToolTipText(null);
             }
         }
 
